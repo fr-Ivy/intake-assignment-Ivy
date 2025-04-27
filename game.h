@@ -27,6 +27,7 @@ private:
 	bool show_Game = false;
 	bool show_startscreen = true;
 
+	int mouseX, mouseY;
 };
 
 }; // namespace Tmpl8

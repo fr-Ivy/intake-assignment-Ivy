@@ -11,3 +11,8 @@ void startscreen::drawButton()
 		surface->Box(button[i].x, button[i].y, button[i].x + 200, button[i].y + 60, 0xffffff);
 	}
 }
+
+void startscreen::detectMouse(int mouse_x, int mouse_y)
+{
+
+}

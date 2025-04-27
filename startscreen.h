@@ -25,5 +25,3 @@ private:
 	int mouse_x = 0;
 	int mouse_y = 0;
 };
-
-// 
