@@ -1,0 +1,14 @@
+fix:
+- collision bullets with the tank
+
+add:
+- everytime the tank collects an item, there should be a dangerous object added to the game
+- make a start screen
+- make a game over screen - r to restart or wait a few seconds until it restarts
+
+
+note:
+- maybe increase the lives?
+
+if there is time left (probably not) add:
+- hearts in the game that the tank can collect to increase its amount of lives

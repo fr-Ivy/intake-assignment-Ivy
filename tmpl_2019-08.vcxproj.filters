@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="game.cpp" />
+    <ClCompile Include="surface.cpp">
+      <Filter>template code</Filter>
+    </ClCompile>
+    <ClCompile Include="template.cpp">
+      <Filter>template code</Filter>
+    </ClCompile>
+    <ClCompile Include="Tank.cpp">
+      <Filter>Tanks</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>items</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullets.cpp">
+      <Filter>Guns</Filter>
+    </ClCompile>
+    <ClCompile Include="Gun.cpp">
+      <Filter>Guns</Filter>
+    </ClCompile>
+    <ClCompile Include="startscreen.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="game.h" />
+    <ClInclude Include="surface.h">
+      <Filter>template code</Filter>
+    </ClInclude>
+    <ClInclude Include="template.h">
+      <Filter>template code</Filter>
+    </ClInclude>
+    <ClInclude Include="Tank.h">
+      <Filter>Tanks</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>items</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullets.h">
+      <Filter>Guns</Filter>
+    </ClInclude>
+    <ClInclude Include="Gun.h">
+      <Filter>Guns</Filter>
+    </ClInclude>
+    <ClInclude Include="startscreen.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="template code">
+      <UniqueIdentifier>{bf32dd6e-4be7-4889-8ac6-49e7ee163c40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="obstacles">
+      <UniqueIdentifier>{a15d0fa1-c838-4e64-9a6f-2fbd3d915a57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="items">
+      <UniqueIdentifier>{ad9fffa7-f125-430a-a873-e7906cbb67a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Guns">
+      <UniqueIdentifier>{e6d2f35a-87cf-464e-9aa6-796d23dbb724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tanks">
+      <UniqueIdentifier>{864fdfa1-d879-43bf-882f-77b0b45fc03d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{2c85cc87-b7b7-4d77-a73b-975a35b3cc61}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="_readme.txt">
+      <Filter>template code</Filter>
+    </Text>
+    <Text Include="about game.txt" />
+  </ItemGroup>
+</Project>
