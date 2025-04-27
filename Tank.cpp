@@ -132,7 +132,7 @@ bool Tank::collision(const Tank& other) const
 {
                 if (posX <= other.posX + 32 && posY <= other.posY + 32 && posX + 32 >= other.posX && posY + 32 >= other.posY)
                 {
-                    std::cout << "hit!" << std::endl;
+                    std::cout << "Hit by a tank!" << std::endl;
                     return true;
                 }
                 return false;
@@ -143,7 +143,7 @@ bool Tank::itemCollision(const Item& item) const
 
     if (posX <= item.getX() + 15 && posY <= item.getY() + 15 && posX + 32 >= item.getX() && posY + 32 >= item.getY())
     {
-        std::cout << "Item!" << std::endl;
+        std::cout << "Item, YAYYYY!" << std::endl;
         return true;
     }
     return false;
@@ -154,7 +154,7 @@ bool Tank::bulletCollision(const Bullets& bullets) const
 
     if (posX <= bullets.getX() + bullets.get_r() && posY <= bullets.getY() + bullets.get_r() && posX + 32 >= bullets.getX() && posY + 32 >= bullets.getY())
     {
-        std::cout << "a Bullet!" << std::endl;
+        std::cout << "a Bullet! ouch!" << std::endl;
         return true;
     }
     return false;

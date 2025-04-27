@@ -15,7 +15,9 @@ public:
 	~startscreen() = default;
 	void drawButton();
 	void detectMouse(int mouse_x, int mouse_y);
-	void button1();
+	void detectButton();
+	void mouseClick(bool clicked);
+	void buttonCase(bool& show_startscreen, bool& show_game);
 
 private:
 	int x = 0;
@@ -25,4 +27,6 @@ private:
 	int button_id = 0;
 	int mouse_x = 0;
 	int mouse_y = 0;
+	int case_number = 0;
+	int button_detected = 0;
 };

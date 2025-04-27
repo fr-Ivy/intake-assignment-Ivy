@@ -140,11 +140,17 @@ namespace Tmpl8
 	// -----------------------------------------------------------
 	void Game::Tick(float deltaTime)
 	{
-		if (show_startscreen)
+		if (show_startscreen && !show_gameover)
 		{
 			start_screen.drawButton();
 			start_screen.detectMouse(mouseX, mouseY);
+			start_screen.detectButton();
+			start_screen.buttonCase(show_startscreen, show_game);
+			start_screen.mouseClick(clicked);
+
+			screen->PrintScaled("PLAY", 375, 400, 2, 2, 0XFFFFFF);
 		}
+
 		if (show_game)
 		{
 			//other stuff
