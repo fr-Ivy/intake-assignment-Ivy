@@ -4,7 +4,7 @@
 
 struct buttons
 {
-	int x, y, id;
+	int x, y, x2, y2;
 };
 
 class startscreen
@@ -15,6 +15,7 @@ public:
 	~startscreen() = default;
 	void drawButton();
 	void detectMouse(int mouse_x, int mouse_y);
+	void button1();
 
 private:
 	int x = 0;

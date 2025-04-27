@@ -69,9 +69,9 @@ namespace Tmpl8
 	{
 		std::vector<buttons> button
 			{
-				{50, 375, 1},
-				{300, 375, 2},
-				{550, 375, 3}
+				{50, 375, 200, 60},
+				{300, 375, 200, 60},
+				{550, 375, 200, 60}
 			};
 
 		start_screen = startscreen(screen, button);
@@ -143,8 +143,9 @@ namespace Tmpl8
 		if (show_startscreen)
 		{
 			start_screen.drawButton();
+			start_screen.detectMouse(mouseX, mouseY);
 		}
-		if (show_Game)
+		if (show_game)
 		{
 			//other stuff
 			cooldown1 -= deltaTime;
