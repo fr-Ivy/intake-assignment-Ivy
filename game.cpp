@@ -140,19 +140,28 @@ namespace Tmpl8
 	// -----------------------------------------------------------
 	void Game::Tick(float deltaTime)
 	{
-		if (show_startscreen && !show_gameover)
+		if (show_startscreen)
 		{
+			screen->Clear(0);
 			start_screen.drawButton();
 			start_screen.detectMouse(mouseX, mouseY);
 			start_screen.detectButton();
-			start_screen.buttonCase(show_startscreen, show_game);
+			start_screen.buttonCase(show_startscreen, show_game, show_controls, exit);
 			start_screen.mouseClick(clicked);
 
 			screen->PrintScaled("PLAY", 375, 400, 2, 2, 0XFFFFFF);
+			screen->PrintScaled("CONTROLS", 100, 400, 2, 2, 0xffffff);
+			screen->PrintScaled("EXIT", 625, 400, 2, 2, 0xffffff);
+		}
+
+		if (show_controls)
+		{
+			screen->Clear(0);
 		}
 
 		if (show_game)
 		{
+			screen->Clear(0);
 			//other stuff
 			cooldown1 -= deltaTime;
 			cooldown2 -= deltaTime;

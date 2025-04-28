@@ -1,7 +1,7 @@
 #include "startscreen.h"
 #include <iostream>
 
-startscreen::startscreen(Tmpl8::Surface* surface, std::vector<buttons> button) : surface(surface), button(button)
+startscreen::startscreen(Tmpl8::Surface* surface, std::vector<buttons> button) : surface(surface), button(button), case_number(-1)
 {
 }
 
@@ -35,42 +35,41 @@ void startscreen::detectButton()
 		}
 		else
 		{
-			button_detected = 3;
+			button_detected = -1;
 		}
 	}
 }
 
 void startscreen::mouseClick(bool clicked)
 {
-	for (int i = 0; i < button.size(); i++)
+
+	if (button_detected >= 0 && clicked && button_detected < button.size())
 	{
-		if (button_detected >= 0 && clicked)
-		{
-			case_number = button_detected;
-			std::cout << case_number << std::endl;
-			clicked = false;
-			break;
-		}
+		case_number = button_detected;
+		//std::cout << case_number << std::endl;
 	}
 }
 
-void startscreen::buttonCase(bool& show_startscreen, bool& show_game)
+void startscreen::buttonCase(bool& show_startscreen, bool& show_game, bool& show_controls, bool& exit)
 {
-	//std::cout << case_number << std::endl;
+	std::cout << "Case number: " << case_number << std::endl;
 	switch (case_number)
 	{
-	case 0: //controls
+	case 0: // controls
+		show_startscreen = false;
+		show_controls = true;
+		std::cout << "Controls button pressed" << std::endl;
 		break;
-
-	case 1: //play
+	case 1: // play
 		show_game = true;
 		show_startscreen = false;
+		std::cout << "Play button pressed" << std::endl;
 		break;
-	case 2: //exit
-
+	case 2: // exit
+		std::cout << "Exit button pressed" << std::endl;
 		break;
-
-	case 3: //might use it?
+	case 3: // nothing happens
+		std::cout << "No action" << std::endl;
 		break;
 	}
 }

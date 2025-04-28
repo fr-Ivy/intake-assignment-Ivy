@@ -17,7 +17,7 @@ public:
 	void detectMouse(int mouse_x, int mouse_y);
 	void detectButton();
 	void mouseClick(bool clicked);
-	void buttonCase(bool& show_startscreen, bool& show_game);
+	void buttonCase(bool& show_startscreen, bool& show_game, bool& show_controls, bool& exit);
 
 private:
 	int x = 0;
