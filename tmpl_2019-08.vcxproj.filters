@@ -17,9 +17,6 @@
     <ClCompile Include="Bullets.cpp">
       <Filter>Guns</Filter>
     </ClCompile>
-    <ClCompile Include="Gun.cpp">
-      <Filter>Guns</Filter>
-    </ClCompile>
     <ClCompile Include="startscreen.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -39,9 +36,6 @@
       <Filter>items</Filter>
     </ClInclude>
     <ClInclude Include="Bullets.h">
-      <Filter>Guns</Filter>
-    </ClInclude>
-    <ClInclude Include="Gun.h">
       <Filter>Guns</Filter>
     </ClInclude>
     <ClInclude Include="startscreen.h">

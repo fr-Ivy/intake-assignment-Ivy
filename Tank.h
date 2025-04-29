@@ -12,14 +12,12 @@ public:
 	~Tank() = default;
 	void setPosition(float posX, float posY);
 	void setFrame(int frame);
-	void Draw(Tmpl8::Surface* surface);
+	void Draw(Tmpl8::Surface& surface);
 	void move(float deltaTime);
-	void Box(Tmpl8::Surface* surface, Tmpl8::Pixel color) const;
+	void Box(const Tmpl8::Surface& surface, Tmpl8::Pixel color = 0) const;
 	bool collision(const Tank& other) const;
 	bool itemCollision(const Item& item) const;
 	bool bulletCollision(const Bullets& bullets) const;
-	bool circleRect(float circle_x, float circle_y, float circle_r, float square_x1, float square_y1, float square_x2, float square_y2);
-
 
 
 private:

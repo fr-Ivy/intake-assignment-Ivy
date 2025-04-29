@@ -71,7 +71,8 @@ namespace Tmpl8
 			{
 				{50, 375, 200, 60},
 				{300, 375, 200, 60},
-				{550, 375, 200, 60}
+				{550, 375, 200, 60},
+				{50, 375, 200, 60}
 			};
 
 		start_screen = startscreen(screen, button);
@@ -105,8 +106,8 @@ namespace Tmpl8
 		//combination down and right = 7
 		//combination down and left = 8
 
-		bullets[0] = Bullets(214, 450, 5, 1.0f, 450, 214);
-		bullets[1] = Bullets(214, 225, 5, 1.0f, 450, 214);
+		bullets[0] = Bullets(214, 450, 5, 240.0f, 214, 450);
+		bullets[1] = Bullets(214, 225, 5, 240.0f, 214, 450);
 
 	}
 	
@@ -143,7 +144,7 @@ namespace Tmpl8
 		if (show_startscreen)
 		{
 			screen->Clear(0);
-			start_screen.drawButton();
+			start_screen.drawButton_startscreen();
 			start_screen.detectMouse(mouseX, mouseY);
 			start_screen.detectButton();
 			start_screen.buttonCase(show_startscreen, show_game, show_controls, exit);
@@ -157,6 +158,11 @@ namespace Tmpl8
 		if (show_controls)
 		{
 			screen->Clear(0);
+			//start_screen.drawButton_controls();
+			//start_screen.detectMouse(mouseX, mouseY);
+			//start_screen.detectButton();
+			//start_screen.buttonCase(show_startscreen, show_game, show_controls, exit);
+			//start_screen.mouseClick(clicked);
 		}
 
 		if (show_game)
@@ -174,7 +180,7 @@ namespace Tmpl8
 
 			for (Bullets& bullet : bullets)
 			{
-				bullet.move();
+				bullet.move(deltaTime);
 			}
 
 
@@ -234,11 +240,11 @@ namespace Tmpl8
 			//draw stuff on screen
 			for (Tank& tank : tanks)
 			{
-				tank.Draw(screen);
+				tank.Draw(*screen);
 			}
 
-			tanks[0].Box(screen, 0xff00ff);
-			tanks[1].Box(screen, 0xff0000);
+			tanks[0].Box(*screen, 0xff00ff);
+			tanks[1].Box(*screen, 0xff0000);
 
 			for (Item& item : item)
 			{

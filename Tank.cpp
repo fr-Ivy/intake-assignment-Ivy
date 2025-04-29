@@ -30,12 +30,12 @@ void Tank::setFrame(int frame)
 }
 
 
-void Tank::Draw(Tmpl8::Surface* surface)
+void Tank::Draw(Tmpl8::Surface& surface)
 {
     if (sprite)
     {
             sprite->SetFrame(frame);
-            sprite->Draw(surface, posX - 10, posY - 7);
+            sprite->Draw(&surface, posX - 10, posY - 7);
     }
 }
 
@@ -122,9 +122,9 @@ void Tank::move(float deltaTime)
     }
 }
 
-void Tank::Box(Tmpl8::Surface* surface, Tmpl8::Pixel color) const
+void Tank::Box(const Tmpl8::Surface& surface, Tmpl8::Pixel color) const
 {
-    surface->Box(posX, posY, posX + 32, posY + 32, color);
+    surface.Box(posX, posY, posX + 32, posY + 32, color);
 }
 
 
@@ -152,7 +152,10 @@ bool Tank::itemCollision(const Item& item) const
 bool Tank::bulletCollision(const Bullets& bullets) const
 {
 
-    if (posX <= bullets.getX() + bullets.get_r() && posY <= bullets.getY() + bullets.get_r() && posX + 32 >= bullets.getX() && posY + 32 >= bullets.getY())
+    if (posX - bullets.get_r() <= bullets.getX() &&
+        posY - bullets.get_r() <= bullets.getY() &&
+        posX + 32 + bullets.get_r() >= bullets.getX() &&
+        posY + 32 + bullets.get_r() >= bullets.getY())
     {
         std::cout << "a Bullet! ouch!" << std::endl;
         return true;

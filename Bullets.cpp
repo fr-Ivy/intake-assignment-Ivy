@@ -2,22 +2,24 @@
 #include "game.h"
 using namespace Tmpl8;
 
-Bullets::Bullets(int x, int y, float r, float speed, int beginY, int beginX)
+Bullets::Bullets(float x, float y, float r, float speed, float beginX, float beginY)
 {
 	this->x = x;
 	this->y = y;
     this->r = r;
-    this->beginY = beginY;
     this->beginX = beginX;
+    this->beginY = beginY;
     this->speed = speed;
 }
 
 
-void Bullets::move()
+void Bullets::move(float deltaTime)
 {
+    deltaTime /= 1000.0f;
+    
     if (y)
     {
-        y -= speed;
+        y -= speed * deltaTime;
     }
     if (!Game::CheckPos(x - r, y - r) ||
         !Game::CheckPos(x + r, y + r) ||

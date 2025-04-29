@@ -5,9 +5,17 @@ startscreen::startscreen(Tmpl8::Surface* surface, std::vector<buttons> button) :
 {
 }
 
-void startscreen::drawButton()
+void startscreen::drawButton_startscreen()
 {
-	for (int i = 0; i < button.size(); i++)
+	for (int i = 0; i < 3; i++)
+	{
+		surface->Box(button[i].x, button[i].y, button[i].x + button[i].x2, button[i].y + button[i].y2, 0xffffff);
+	}
+}
+
+void startscreen::drawButton_controls() //not active
+{
+	for (int i = 3; i < 4; i++)
 	{
 		surface->Box(button[i].x, button[i].y, button[i].x + button[i].x2, button[i].y + button[i].y2, 0xffffff);
 	}
@@ -33,10 +41,6 @@ void startscreen::detectButton()
 			button_detected = i;
 			break;
 		}
-		else
-		{
-			button_detected = -1;
-		}
 	}
 }
 
@@ -52,7 +56,7 @@ void startscreen::mouseClick(bool clicked)
 
 void startscreen::buttonCase(bool& show_startscreen, bool& show_game, bool& show_controls, bool& exit)
 {
-	std::cout << "Case number: " << case_number << std::endl;
+	//std::cout << "Case number: " << case_number << std::endl;
 	switch (case_number)
 	{
 	case 0: // controls
@@ -68,8 +72,7 @@ void startscreen::buttonCase(bool& show_startscreen, bool& show_game, bool& show
 	case 2: // exit
 		std::cout << "Exit button pressed" << std::endl;
 		break;
-	case 3: // nothing happens
-		std::cout << "No action" << std::endl;
+	case 3:
 		break;
 	}
 }

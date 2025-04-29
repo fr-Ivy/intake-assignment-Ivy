@@ -1,6 +1,5 @@
 fix:
 - collision bullets with the tank
-- buttons after clicking
 
 add:
 - everytime the tank collects an item, there should be a dangerous object added to the game

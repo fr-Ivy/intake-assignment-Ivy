@@ -148,7 +148,7 @@ int LineOutCode(float x, float y, float xMin, float xMax, float yMin, float yMax
 	return (((x) < xMin) ? 1 : (((x) > xMax) ? 2 : 0)) + (((y) < yMin) ? 4 : (((y) > yMax) ? 8 : 0));
 }
 	
-void Surface::Line( float x1, float y1, float x2, float y2, Pixel c )
+void Surface::Line( float x1, float y1, float x2, float y2, Pixel c ) const
 {
 	// clip (Cohen-Sutherland, https://en.wikipedia.org/wiki/Cohen%E2%80%93Sutherland_algorithm)
 	const float xmin = 0, ymin = 0, xmax = ScreenWidth - 1, ymax = ScreenHeight - 1;
@@ -189,7 +189,7 @@ void Surface::Plot( int x, int y, Pixel c )
 	if ((x >= 0) && (y >= 0) && (x < m_Width) && (y < m_Height)) m_Buffer[x + y * m_Pitch] = c;
 }
 
-void Surface::Box( int x1, int y1, int x2, int y2, Pixel c )
+void Surface::Box( int x1, int y1, int x2, int y2, Pixel c ) const
 {
 	Line( (float)x1, (float)y1, (float)x2, (float)y1, c );
 	Line( (float)x2, (float)y1, (float)x2, (float)y2, c );
