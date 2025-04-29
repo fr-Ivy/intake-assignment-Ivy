@@ -30,7 +30,7 @@ void Tank::setFrame(int frame)
 }
 
 
-void Tank::Draw(Tmpl8::Surface& surface)
+void Tank::Draw(Tmpl8::Surface& surface) const
 {
     if (sprite)
     {

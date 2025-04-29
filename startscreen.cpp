@@ -28,9 +28,9 @@ void startscreen::detectMouse(int mouse_x, int mouse_y)
 	//std::cout << mouse_x << ", " << mouse_y << std::endl;
 }
 
-void startscreen::detectButton()
+void startscreen::detectButton(int start, int end) //which buttons should it detect
 {
-	for (int i = 0; i < button.size(); i++)
+	for (int i = start; i < end; i++)
 	{
 		if (mouse_x <= button[i].x + button[i].x2 && 
 			mouse_x >= button[i].x &&
@@ -54,7 +54,7 @@ void startscreen::mouseClick(bool clicked)
 	}
 }
 
-void startscreen::buttonCase(bool& show_startscreen, bool& show_game, bool& show_controls, bool& exit)
+void startscreen::buttonCase(bool& show_startscreen, bool& show_game, bool& show_controls)
 {
 	//std::cout << "Case number: " << case_number << std::endl;
 	switch (case_number)
@@ -62,17 +62,21 @@ void startscreen::buttonCase(bool& show_startscreen, bool& show_game, bool& show
 	case 0: // controls
 		show_startscreen = false;
 		show_controls = true;
-		std::cout << "Controls button pressed" << std::endl;
+		//std::cout << "Controls button pressed" << std::endl;
 		break;
 	case 1: // play
 		show_game = true;
 		show_startscreen = false;
-		std::cout << "Play button pressed" << std::endl;
+		//std::cout << "Play button pressed" << std::endl;
 		break;
 	case 2: // exit
-		std::cout << "Exit button pressed" << std::endl;
+		exit(0);
+		//std::cout << "Exit button pressed" << std::endl;
 		break;
 	case 3:
+		//std::cout << "Back button pressed" << std::endl;
+		show_startscreen = true;
+		show_controls = false;
 		break;
 	}
 }

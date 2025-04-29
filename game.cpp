@@ -72,7 +72,7 @@ namespace Tmpl8
 				{50, 375, 200, 60},
 				{300, 375, 200, 60},
 				{550, 375, 200, 60},
-				{50, 375, 200, 60}
+				{680, 20, 100, 60}
 			};
 
 		start_screen = startscreen(screen, button);
@@ -146,8 +146,8 @@ namespace Tmpl8
 			screen->Clear(0);
 			start_screen.drawButton_startscreen();
 			start_screen.detectMouse(mouseX, mouseY);
-			start_screen.detectButton();
-			start_screen.buttonCase(show_startscreen, show_game, show_controls, exit);
+			start_screen.detectButton(0, 3);
+			start_screen.buttonCase(show_startscreen, show_game, show_controls);
 			start_screen.mouseClick(clicked);
 
 			screen->PrintScaled("PLAY", 375, 400, 2, 2, 0XFFFFFF);
@@ -158,11 +158,17 @@ namespace Tmpl8
 		if (show_controls)
 		{
 			screen->Clear(0);
-			//start_screen.drawButton_controls();
-			//start_screen.detectMouse(mouseX, mouseY);
-			//start_screen.detectButton();
-			//start_screen.buttonCase(show_startscreen, show_game, show_controls, exit);
-			//start_screen.mouseClick(clicked);
+			start_screen.drawButton_controls();
+			start_screen.detectMouse(mouseX, mouseY);
+			start_screen.detectButton(3, 4);
+			start_screen.buttonCase(show_startscreen, show_game, show_controls);
+			start_screen.mouseClick(clicked);
+
+			screen->PrintScaled("BACK", 700, 45, 3, 3, 0XFFFFFF);
+			screen->PrintScaled("ARROW KEY UP - UP", 50, 120, 2, 2, 0XFFFFFF);
+			screen->PrintScaled("ARROW KEY LEFT - LEFT", 50, 150, 2, 2, 0XFFFFFF);
+			screen->PrintScaled("ARROW KEY DOWN - DOWN", 50, 180, 2, 2, 0XFFFFFF);
+			screen->PrintScaled("ARROW KEY RIGHT - RIGHT", 50, 210, 2, 2, 0XFFFFFF);
 		}
 
 		if (show_game)

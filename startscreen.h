@@ -16,9 +16,9 @@ public:
 	void drawButton_startscreen();
 	void drawButton_controls();
 	void detectMouse(int mouse_x, int mouse_y);
-	void detectButton();
+	void detectButton(int start, int end);
 	void mouseClick(bool clicked);
-	void buttonCase(bool& show_startscreen, bool& show_game, bool& show_controls, bool& exit);
+	void buttonCase(bool& show_startscreen, bool& show_game, bool& show_controls);
 
 private:
 	int x = 0;
