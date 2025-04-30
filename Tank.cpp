@@ -8,7 +8,7 @@
 
 using namespace Tmpl8;
 
-Tank::Tank(float posX, float posY, int frame, Tmpl8::Sprite* sprite, float behaviour)
+Tank::Tank(float const posX, float const posY, int const frame, Tmpl8::Sprite* sprite, int const behaviour)
 {
     this->posX = posX;
     this->posY = posY;
@@ -16,15 +16,16 @@ Tank::Tank(float posX, float posY, int frame, Tmpl8::Sprite* sprite, float behav
     this->sprite = sprite;
     this->behaviour = behaviour;
     this->beginY = posY;
+    this->beginX = posX;
 }
 
-void Tank::setPosition(float posX, float posY)
+void Tank::setPosition(float const posX, float const posY)
 {
     this->posX = posX;
     this->posY = posY;
 }
 
-void Tank::setFrame(int frame)
+void Tank::setFrame(int const frame)
 {
     this->frame = frame;
 }
@@ -42,7 +43,8 @@ void Tank::Draw(Tmpl8::Surface& surface) const
 
 void Tank::move(float deltaTime)
 {
-    if (behaviour == 1.0f)
+    deltaTime /= 1000.0f;
+    if (behaviour == 1)
     {
         float nx = posX;
         float ny = posY;
@@ -50,19 +52,19 @@ void Tank::move(float deltaTime)
 
 
         if (GetAsyncKeyState(VK_LEFT)) {
-            nx = posX - 1.0f;
+            nx -= (240.0f * deltaTime);
             frame = 12;
         }
         if (GetAsyncKeyState(VK_RIGHT)) {
-            nx = posX + 1.0f;
+            nx += (240.0f * deltaTime);
             frame = 4;
         }
         if (GetAsyncKeyState(VK_UP)) {
-            ny = posY - 1.0f;
+            ny -= (240.0f * deltaTime);
             frame = 8;
         }
         if (GetAsyncKeyState(VK_DOWN)) {
-            ny = posY + 1.0f;
+            ny += (240.0f * deltaTime);
             frame = 0;
         }
 
@@ -77,36 +79,10 @@ void Tank::move(float deltaTime)
         }
     }
 
-   /* if (behaviour == 2.0f)
-    {
-        static float seconds = 0.0f;
-        seconds += deltaTime;
-
-        if (seconds >= 10.0f)
-        {
-            if (posY)
+            if (behaviour == 2)
             {
-                posY--;
-            }
-            if (posY == 6.0f * 32.0f)
-            {
-                posY = 10.0f * 32.0f;
-            }
-
-            seconds = 0.0f;
-            frame = 8.0f;
-        }
-    }*/
-
-    if (behaviour == 2.0f)
-    {
-        seconds += deltaTime;
-
-        if (seconds >= 10.0f)
-        {
-            if (posY)
-            {
-                posY--;
+                posY -= 100.0f * deltaTime;
+                frame = 8;
             }
             if (!Game::CheckPos(posX, posY) ||
                 !Game::CheckPos(posX + 30.0f, posY + 30.0f) ||
@@ -114,12 +90,8 @@ void Tank::move(float deltaTime)
                 !Game::CheckPos(posX, posY + 30.0f))
             {
                 posY = beginY;
+                posX = beginX;
             }
-
-            seconds = 0.0f;
-            frame = 8.0f;
-        }
-    }
 }
 
 void Tank::Box(const Tmpl8::Surface& surface, Tmpl8::Pixel color) const

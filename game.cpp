@@ -44,9 +44,7 @@ namespace Tmpl8
 	float Enemy1X = 20.0f * 32.0f, Enemy1Y = 10.0f * 32.0f;
 	int framePlayer = 8;
 	int frameEnemy = 8;
-	float PlayerBehaviour = 1.0f;
-	float enemy1Behaviour = 2.0f;
-	Tank tanks[2];
+	Tank tanks[6];
 	Item item[1];
 	int itemX = 45;
 	int itemY = 45;
@@ -62,7 +60,7 @@ namespace Tmpl8
 	int bulletFrame = 1;
 	float Seconds = 0.0f;
 	int amount = 0;
-	Bullets bullets[5];
+	Bullets bullets[1000];
 	startscreen start_screen;
 
 	void Game::Init()
@@ -76,8 +74,9 @@ namespace Tmpl8
 			};
 
 		start_screen = startscreen(screen, button);
-		tanks[0] = Tank(TankX, TankY, framePlayer, &tank, PlayerBehaviour);
-		tanks[1] = Tank(Enemy1X, Enemy1Y, frameEnemy, &badTank, enemy1Behaviour);
+
+		tanks[0] = Tank(TankX, TankY, framePlayer, &tank, 1);
+		tanks[1] = Tank(Enemy1X, Enemy1Y, frameEnemy, &badTank, 2);
 
 		for (Tank& tank : tanks)
 		{
@@ -89,12 +88,10 @@ namespace Tmpl8
 
 		item[0] = Item(itemX, itemY);
 
-		for (Item& item : item)
+		for (Item& items : item)
 		{
-			item.setPosition(itemX, itemY);
+			items.setPosition(itemX, itemY);
 		}
-
-		//guns[0] = Gun(gunX1, gunY1, 1, &gun, 1);
 
 		//bullets directions:
 		//up = 1
@@ -106,8 +103,13 @@ namespace Tmpl8
 		//combination down and right = 7
 		//combination down and left = 8
 
-		bullets[0] = Bullets(214, 450, 5, 240.0f, 214, 450);
-		bullets[1] = Bullets(214, 225, 5, 240.0f, 214, 450);
+		
+		bullets[0] = Bullets(214, 450, 5, 240.0f, 214, 450, 1);
+		bullets[1] = Bullets(214, 225, 5, 240.0f, 214, 450, 1);
+
+		bullets[2] = Bullets(14 * 32 + 2 + 14, 12 * 32, 5, 240.0f, 14 * 32 + 2 + 14, 12 * 32, 1);
+		bullets[3] = Bullets(14 * 32 + 2 + 14, 6 * 32, 5, 240.0f, 14 * 32 + 2 + 14, 12 * 32, 1);
+
 
 	}
 	
@@ -120,7 +122,7 @@ namespace Tmpl8
 
 
 
-	void DrawTile(int tx, int ty, Surface* screen, int x, int y)
+	void DrawTile(int const tx, int const ty, Surface* screen, int const x, int const y)
 	{
 		Pixel* src = tiles.GetBuffer() + 1 + tx * 33 + (1 + ty * 33) * 595;
 		Pixel* dst = screen->GetBuffer() + x + y * 800;
@@ -202,9 +204,9 @@ namespace Tmpl8
 
 			if (tanks[0].itemCollision(item[0]))
 			{
-				for (Item& item : item)
+				for (Item& items : item)
 				{
-					item.move();
+					items.move();
 					if (cooldown2 <= 0.0f)
 					{
 						collected++;
@@ -252,9 +254,9 @@ namespace Tmpl8
 			tanks[0].Box(*screen, 0xff00ff);
 			tanks[1].Box(*screen, 0xff0000);
 
-			for (Item& item : item)
+			for (Item& items : item)
 			{
-				item.draw(screen);
+				items.draw(screen);
 			}
 
 			int amount = 0;
@@ -265,6 +267,7 @@ namespace Tmpl8
 			}
 
 			gun.Draw(screen, 200, 460);
+			gun.Draw(screen, 14 * 32 + 2, 12 * 32 + 9);
 		}
 	}
 

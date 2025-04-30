@@ -5,7 +5,7 @@ startscreen::startscreen(Tmpl8::Surface* surface, std::vector<buttons> button) :
 {
 }
 
-void startscreen::drawButton_startscreen()
+void startscreen::drawButton_startscreen() const
 {
 	for (int i = 0; i < 3; i++)
 	{
@@ -13,7 +13,7 @@ void startscreen::drawButton_startscreen()
 	}
 }
 
-void startscreen::drawButton_controls() //not active
+void startscreen::drawButton_controls() const //not active
 {
 	for (int i = 3; i < 4; i++)
 	{
@@ -28,7 +28,7 @@ void startscreen::detectMouse(int mouse_x, int mouse_y)
 	//std::cout << mouse_x << ", " << mouse_y << std::endl;
 }
 
-void startscreen::detectButton(int start, int end) //which buttons should it detect
+void startscreen::detectButton(int const start, int const end) //which buttons should it detect
 {
 	for (int i = start; i < end; i++)
 	{
@@ -54,7 +54,7 @@ void startscreen::mouseClick(bool clicked)
 	}
 }
 
-void startscreen::buttonCase(bool& show_startscreen, bool& show_game, bool& show_controls)
+void startscreen::buttonCase(bool& show_startscreen, bool& show_game, bool& show_controls) const
 {
 	//std::cout << "Case number: " << case_number << std::endl;
 	switch (case_number)

@@ -2,7 +2,7 @@
 #include "game.h"
 using namespace Tmpl8;
 
-Bullets::Bullets(float x, float y, float r, float speed, float beginX, float beginY)
+Bullets::Bullets(float const x, float const y, float const r, float const speed, float const beginX, float const beginY, int const direction)
 {
 	this->x = x;
 	this->y = y;
@@ -17,10 +17,26 @@ void Bullets::move(float deltaTime)
 {
     deltaTime /= 1000.0f;
     
-    if (y)
+    if (direction == 1)
     {
         y -= speed * deltaTime;
     }
+
+    if (direction == 2)
+    {
+        y += speed * deltaTime;
+    }
+
+    if (direction == 3)
+    {
+        x += speed * deltaTime;
+    }
+
+    if (direction == 4)
+    {
+        x -= speed * deltaTime;
+    }
+
     if (!Game::CheckPos(x - r, y - r) ||
         !Game::CheckPos(x + r, y + r) ||
         !Game::CheckPos(x - r, y + r) ||

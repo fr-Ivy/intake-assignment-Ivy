@@ -4,7 +4,7 @@ class Bullets
 {
 public:
 	Bullets() = default;
-	Bullets(float x, float y, float r, float speed, float beginX, float beginY);
+	Bullets(float const x, float const y, float const r, float const speed, float const beginX, float const beginY, int const direction);
 	~Bullets() = default;
 	void move(float deltaTime);
 	void draw(Tmpl8::Surface* surface);
@@ -23,5 +23,6 @@ private:
 	float beginX = 0;
 	float beginY = 0;
 	float speed = 0.0f;
+	int direction = 1;
 };
 

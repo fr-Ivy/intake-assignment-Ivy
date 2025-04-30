@@ -3,14 +3,14 @@
 
 using namespace Tmpl8;
 
-Item::Item(float x, float y)
+Item::Item(float const x, float const y)
 {
 	this->x = x;
 	this->y = y;
 
 }
 
-void Item::setPosition(float x, float y)
+void Item::setPosition(float const x, float const y)
 {
 	this->x = x;
 	this->y = y;

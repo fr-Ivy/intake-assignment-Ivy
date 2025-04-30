@@ -8,12 +8,12 @@ class Tank
 {
 public:
 	Tank() = default;
-	Tank(float posX, float posY, int frame, Tmpl8::Sprite* sprite, float behaviour);
+	Tank(float const posX, float const posY, int const frame, Tmpl8::Sprite* sprite, int const behaviour);
 	~Tank() = default;
-	void setPosition(float posX, float posY);
-	void setFrame(int frame);
+	void setPosition(float const posX, float const posY);
+	void setFrame(int const frame);
 	void Draw(Tmpl8::Surface& surface) const;
-	void move(float deltaTime);
+	void move(float const deltaTime);
 	void Box(const Tmpl8::Surface& surface, Tmpl8::Pixel color = 0) const;
 	bool collision(const Tank& other) const;
 	bool itemCollision(const Item& item) const;
@@ -26,8 +26,11 @@ private:
 	int frame = 0.0f;
 	Tmpl8::Sprite* sprite = nullptr;
 	float behaviour = 0.0f;
+	float beginX = 0.0f;
 	float beginY = 0.0f;
 	float seconds = 0.0f;
+	float deltaTime1 = 0.0f;
+	float deltaTime2 = 0.0f;
 };
 
 

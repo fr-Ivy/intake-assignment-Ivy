@@ -2,13 +2,13 @@ fix:
 
 add:
 - everytime the tank collects an item, there should be a dangerous object added to the game
-- finish start screen
 - make a game over screen - r to restart or wait a few seconds until it restarts
-- finish the map?!!!
+- finish the map!!!
 - controls W, A, S, D
 
 note:
 - maybe increase the amount of lives?
+- change the controls screen to an image with information?
 
 if there is time left (probably not (stupid exams)) add:
 - hearts in the game that the tank can collect to increase its amount of lives
