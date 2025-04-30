@@ -171,7 +171,7 @@ namespace Tmpl8
 			screen->PrintScaled("ARROW KEY LEFT - LEFT", 50, 150, 2, 2, 0XFFFFFF);
 			screen->PrintScaled("ARROW KEY DOWN - DOWN", 50, 180, 2, 2, 0XFFFFFF);
 			screen->PrintScaled("ARROW KEY RIGHT - RIGHT", 50, 210, 2, 2, 0XFFFFFF);
-		}
+		} 
 
 		if (show_game)
 		{

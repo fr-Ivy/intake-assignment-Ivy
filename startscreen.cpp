@@ -1,7 +1,7 @@
 #include "startscreen.h"
 #include <iostream>
 
-startscreen::startscreen(Tmpl8::Surface* surface, std::vector<buttons> button) : surface(surface), button(button), case_number(-1)
+startscreen::startscreen(Tmpl8::Surface* surface, std::vector<buttons> button) : surface(surface), button(button), case_number(-1), button_detected(-1)
 {
 }
 
@@ -37,16 +37,20 @@ void startscreen::detectButton(int const start, int const end) //which buttons s
 			mouse_y <= button[i].y + button[i].y2 && 
 			mouse_y >= button[i].y)
 		{
-			//std::cout << "detected" << std::endl;
+			std::cout << "detected" << std::endl;
 			button_detected = i;
 			break;
 		}
+		else
+		{
+			button_detected = -1;
+		}
 	}
+
 }
 
 void startscreen::mouseClick(bool clicked)
 {
-
 	if (button_detected >= 0 && clicked && button_detected < button.size())
 	{
 		case_number = button_detected;
