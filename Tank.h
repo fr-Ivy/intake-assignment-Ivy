@@ -14,7 +14,7 @@ public:
 	void setFrame(int const frame);
 	void Draw(Tmpl8::Surface& surface) const;
 	void move(float const deltaTime);
-	void Box(const Tmpl8::Surface& surface, Tmpl8::Pixel color = 0) const;
+	void Box(const Tmpl8::Surface& surface, Tmpl8::Pixel const color = 0) const;
 	bool collision(const Tank& other) const;
 	bool itemCollision(const Item& item) const;
 	bool bulletCollision(const Bullets& bullets) const;
@@ -25,7 +25,7 @@ private:
 	float posY = 0.0f;
 	int frame = 0.0f;
 	Tmpl8::Sprite* sprite = nullptr;
-	float behaviour = 0.0f;
+	int behaviour = 0.0f;
 	float beginX = 0.0f;
 	float beginY = 0.0f;
 	float seconds = 0.0f;

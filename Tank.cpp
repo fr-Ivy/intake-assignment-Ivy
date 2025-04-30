@@ -35,8 +35,8 @@ void Tank::Draw(Tmpl8::Surface& surface) const
 {
     if (sprite)
     {
-            sprite->SetFrame(frame);
-            sprite->Draw(&surface, posX - 10, posY - 7);
+    	sprite->SetFrame(frame);
+    	sprite->Draw(&surface, posX - 10, posY - 7);
     }
 }
 
@@ -52,19 +52,19 @@ void Tank::move(float deltaTime)
 
 
         if (GetAsyncKeyState(VK_LEFT)) {
-            nx -= (240.0f * deltaTime);
+            nx = nx - (3.0f);
             frame = 12;
         }
         if (GetAsyncKeyState(VK_RIGHT)) {
-            nx += (240.0f * deltaTime);
+            nx = nx + (3.0f);
             frame = 4;
         }
         if (GetAsyncKeyState(VK_UP)) {
-            ny -= (240.0f * deltaTime);
+            ny = ny - (3.0f);
             frame = 8;
         }
         if (GetAsyncKeyState(VK_DOWN)) {
-            ny += (240.0f * deltaTime);
+            ny = ny + (3.0f);
             frame = 0;
         }
 
@@ -79,22 +79,22 @@ void Tank::move(float deltaTime)
         }
     }
 
-            if (behaviour == 2)
-            {
-                posY -= 100.0f * deltaTime;
-                frame = 8;
-            }
-            if (!Game::CheckPos(posX, posY) ||
-                !Game::CheckPos(posX + 30.0f, posY + 30.0f) ||
-                !Game::CheckPos(posX + 30.0f, posY) ||
-                !Game::CheckPos(posX, posY + 30.0f))
-            {
-                posY = beginY;
-                posX = beginX;
-            }
+    if (behaviour == 2)
+    {
+    	posY -= 100.0f * deltaTime;
+    	frame = 8;
+    }
+    if (!Game::CheckPos(posX, posY) ||
+		!Game::CheckPos(posX + 30.0f, posY + 30.0f) ||
+		!Game::CheckPos(posX + 30.0f, posY) ||
+		!Game::CheckPos(posX, posY + 30.0f))
+    {
+    	posY = beginY;
+    	posX = beginX;
+    }
 }
 
-void Tank::Box(const Tmpl8::Surface& surface, Tmpl8::Pixel color) const
+void Tank::Box(const Tmpl8::Surface& surface, Tmpl8::Pixel const color) const
 {
     surface.Box(posX, posY, posX + 32, posY + 32, color);
 }
@@ -102,12 +102,12 @@ void Tank::Box(const Tmpl8::Surface& surface, Tmpl8::Pixel color) const
 
 bool Tank::collision(const Tank& other) const
 {
-                if (posX <= other.posX + 32 && posY <= other.posY + 32 && posX + 32 >= other.posX && posY + 32 >= other.posY)
-                {
-                    std::cout << "Hit by a tank!" << std::endl;
-                    return true;
-                }
-                return false;
+	if (posX <= other.posX + 32 && posY <= other.posY + 32 && posX + 32 >= other.posX && posY + 32 >= other.posY)
+	{
+		std::cout << "Hit by a tank!" << std::endl;
+		return true;
+	}
+	return false;
 }
 
 bool Tank::itemCollision(const Item& item) const
