@@ -46,26 +46,26 @@ void Tank::move(float deltaTime)
     deltaTime /= 1000.0f;
     if (behaviour == 1)
     {
+        float moveSpeed = 200.0f;
         float nx = posX;
         float ny = posY;
 
         if (GetAsyncKeyState(VK_LEFT)) {
-            nx = nx - (3.0f);
+            nx -= moveSpeed * deltaTime;
             frame = 12;
         }
         if (GetAsyncKeyState(VK_RIGHT)) {
-            nx = nx + (3.0f);
+            nx += moveSpeed * deltaTime;
             frame = 4;
         }
         if (GetAsyncKeyState(VK_UP)) {
-            ny = ny - (3.0f);
+            ny -= moveSpeed * deltaTime;
             frame = 8;
         }
         if (GetAsyncKeyState(VK_DOWN)) {
-            ny = ny + (3.0f);
+            ny += moveSpeed * deltaTime;
             frame = 0;
         }
-
 
         if (Game::CheckPos(nx, ny) &&
             Game::CheckPos(nx + 30.0f, ny + 30.0f) &&
