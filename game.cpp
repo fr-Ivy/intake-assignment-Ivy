@@ -60,7 +60,7 @@ namespace Tmpl8
 	int bulletFrame = 1;
 	float Seconds = 0.0f;
 	int amount = 0;
-	Bullets bullets[1000];
+	Bullets bullets[10];
 	startscreen start_screen;
 
 	void Game::Init()
