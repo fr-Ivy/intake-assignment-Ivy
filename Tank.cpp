@@ -15,8 +15,8 @@ Tank::Tank(float const posX, float const posY, int const frame, Tmpl8::Sprite* s
     this->frame = frame;
     this->sprite = sprite;
     this->behaviour = behaviour;
-    this->beginY = posY;
     this->beginX = posX;
+    this->beginY = posY;
 }
 
 void Tank::setPosition(float const posX, float const posY)
@@ -48,8 +48,6 @@ void Tank::move(float deltaTime)
     {
         float nx = posX;
         float ny = posY;
-
-
 
         if (GetAsyncKeyState(VK_LEFT)) {
             nx = nx - (3.0f);
