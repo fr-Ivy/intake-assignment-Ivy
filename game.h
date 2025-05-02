@@ -27,10 +27,16 @@ public:
 		}
 	}
 
-	void MouseMove(int x, int y) { mouseX += x; mouseY += y; }
+	void MouseMove(int x, int y) 
+	{ 
+		mouseX += x; mouseY += y; 
+
+	}
 	void KeyUp( int key ) { /* implement if you want to handle keys */ }
 	void KeyDown(int key) { theKey = key; }
 	static bool CheckPos(float x, float y);
+	static bool CheckGun(float x, float y);
+	void drawGun();
 
 private:
 	Surface* screen;

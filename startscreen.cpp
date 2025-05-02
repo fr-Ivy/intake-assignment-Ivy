@@ -5,17 +5,9 @@ startscreen::startscreen(Tmpl8::Surface* surface, std::vector<buttons> button) :
 {
 }
 
-void startscreen::drawButton_startscreen() const
+void startscreen::drawButton(int const start, int const end) const
 {
-	for (int i = 0; i < 3; i++)
-	{
-		surface->Box(button[i].x, button[i].y, button[i].x + button[i].x2, button[i].y + button[i].y2, 0xffffff);
-	}
-}
-
-void startscreen::drawButton_controls() const //not active
-{
-	for (int i = 3; i < 4; i++)
+	for (int i = start; i < end; i++)
 	{
 		surface->Box(button[i].x, button[i].y, button[i].x + button[i].x2, button[i].y + button[i].y2, 0xffffff);
 	}
@@ -37,7 +29,7 @@ void startscreen::detectButton(int const start, int const end) //which buttons s
 			mouse_y <= button[i].y + button[i].y2 && 
 			mouse_y >= button[i].y)
 		{
-			std::cout << "detected" << std::endl;
+			//std::cout << "detected" << std::endl;
 			button_detected = i;
 			break;
 		}

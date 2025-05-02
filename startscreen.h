@@ -13,8 +13,7 @@ public:
 	startscreen() = default;
 	startscreen(Tmpl8::Surface* surface, std::vector<buttons> button);
 	~startscreen() = default;
-	void drawButton_startscreen() const;
-	void drawButton_controls() const;
+	void drawButton(int const start, int const end) const;
 	void detectMouse(int mouse_x, int mouse_y);
 	void detectButton(int const start, int const end);
 	void mouseClick(bool clicked);

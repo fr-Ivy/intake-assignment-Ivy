@@ -44,7 +44,7 @@ void Tank::Draw(Tmpl8::Surface& surface) const
 void Tank::move(float deltaTime)
 {
     deltaTime /= 1000.0f;
-    if (behaviour == 1)
+    if (behaviour == 0)
     {
         float moveSpeed = 200.0f;
         float nx = posX;
@@ -70,22 +70,45 @@ void Tank::move(float deltaTime)
         if (Game::CheckPos(nx, ny) &&
             Game::CheckPos(nx + 30.0f, ny + 30.0f) &&
             Game::CheckPos(nx + 30.0f, ny) &&
-            Game::CheckPos(nx, ny + 30.0f))
+            Game::CheckPos(nx, ny + 30.0f) && 
+            Game::CheckGun(nx, ny) &&
+            Game::CheckGun(nx + 30.0f, ny + 30.0f) &&
+            Game::CheckGun(nx + 30.0f, ny) &&
+            Game::CheckGun(nx, ny + 30.0f))
         {
             posX = nx;
             posY = ny;
         }
     }
 
-    if (behaviour == 2)
+    if (behaviour == 1)
     {
     	posY -= 100.0f * deltaTime;
     	frame = 8;
     }
+
+    if (behaviour == 2)
+    {
+        posX += 100.0f * deltaTime;
+        frame = 12;
+    }
+
+    if (behaviour == 3)
+    {
+        posY += 100.0f * deltaTime;
+        frame = 0;
+    }
+
+    if (behaviour == 4)
+    {
+        posX -= 100.0f * deltaTime;
+        frame = 4;
+    }
+
     if (!Game::CheckPos(posX, posY) ||
 		!Game::CheckPos(posX + 30.0f, posY + 30.0f) ||
 		!Game::CheckPos(posX + 30.0f, posY) ||
-		!Game::CheckPos(posX, posY + 30.0f))
+		!Game::CheckPos(posX, posY + 30.0f) && behaviour > 1)
     {
     	posY = beginY;
     	posX = beginX;

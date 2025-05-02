@@ -15,35 +15,41 @@ namespace Tmpl8
 {
 	static char map[16][76] =
 	{
-		"aaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXdaX",
+		"aaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXda8",
 		"cbXfb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb cbX",
 		"cbXfb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb cbX",
-		"cbXfb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb adXfb fb fb fb fb cbX",
-		"cbXfb fb fb fb fb fb fb fb fb fb adXfb fb fb fb fb fb cbXfb fb fb fb fb cbX",
-		"abXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXddXfb fb fb fb fb fb acXbaXneXbcXfb fb cbX",
+		"cbXfb fb fb fb fb fb fb fb fb fb adXfb fb fb fb fb fb adXfb fb fb fb fb cbX",
+		"cbXfb fb fb fb fb fb fb fb fb fb cbXfb fb fb fb fb fb cbXfb fb fb fb fb cbX",
+		"abXcdXcdXcdXcdXcdXbcXfb fb bdXcdXddXfb fb fb fb fb fb ac8baXneXbcXfb fb cbX",
 		"cbXfb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb cbX",
 		"cbXfb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb cbX",
-		"cbXfb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb cbX",
-		"cbXfb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb cbX",
-		"cbXfb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb cbX",
-		"cbXfb fb fb fb fb fb fb fb bdXcdXcdXcdXdaXfb aaXcdXcdXcdXcdXcdXdaXfb fb cbX",
-		"cbXfb fb fb fb fb fb fb fb fb fb fb fb cbXfb cbXfb fb fb fb fb cbXfb fb cbX",
-		"cbXfb fb fb fb fb fb fb fb fb fb fb fb ieXcdXdcXfb fb fb fb fb cbXfb fb cbX",
-		"cbXfb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb cbXfb ff cbX",
+		"cbXfb fb fb adXfb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb cbX",
+		"cbXfb fb fb cbXfb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb cbX",
+		"cbXfb fb fb cbXfb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb cbX",
+		"cbXfb fb fb cbXfb fb fb fb bdXcdXcdXcdXdaXfb aaXcdXcdXcdXcdXcdXdaXfb fb cbX",
+		"cbXfb fb fb cbXfb fb fb fb fb fb fb fb cbXfb1cbXfb fb fb fb fb cbXfb fb cbX",
+		"cbXfb fb fb dbXfb fb fb fb fb fb fb fb ieXcdXdcXfb fb fb fb fb cbXfb fb cbX",
+		"cbXfb fb fb fb fb fb1fb fb fb fb fb fb fb fb fb fb fb fb fb fb cbXfb ff cbX",
 		"acXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXddX"
 	};
 
 	Surface tiles("assets/nc2tiles.png");
 	Sprite tank(new Surface ("assets/ctankbase.tga"), 16);
-	Sprite badTank(new Surface("assets/ctankbase.tga"), 16);
-	Sprite gun(new Surface("assets/minigun.tga"), 32);
+	Sprite badTank1(new Surface("assets/ctankbase.tga"), 16);
+	Sprite badTank2(new Surface("assets/ctankbase.tga"), 16);
+	Sprite badTank3(new Surface("assets/ctankbase.tga"), 16);
+	Sprite gun1(new Surface("assets/minigun.tga"), 32);
+	Sprite gun2(new Surface("assets/minigun.tga"), 32);
+	Sprite gun3(new Surface("assets/minigun.tga"), 32);
 	Sprite bullet(new Surface("assets/phaser.tga"), 16);
+	Sprite mouse(new Surface("assets/target.tga"), 1);
 
 
 	float TankX = 23.0f * 32.0f, TankY = 14.0f * 32.0f;
 	float Enemy1X = 20.0f * 32.0f, Enemy1Y = 10.0f * 32.0f;
-	int framePlayer = 8;
-	int frameEnemy = 8;
+	float Enemy2X = 12.0f * 32.0f, Enemy2Y = 1.0f * 32.0f;
+	float Enemy3X = 11.0f * 32.0f, Enemy3Y = 6.0f * 32.0f;
+	float Enemy4X = 1.0f * 32.0f, Enemy4Y = 4.0f * 32.0f;
 	Tank tanks[6];
 	Item item[1];
 	int itemX = 45;
@@ -75,15 +81,21 @@ namespace Tmpl8
 
 		start_screen = startscreen(screen, button);
 
-		tanks[0] = Tank(TankX, TankY, framePlayer, &tank, 1);
-		tanks[1] = Tank(Enemy1X, Enemy1Y, frameEnemy, &badTank, 2);
+		tanks[0] = Tank(TankX, TankY, 8, &tank, 0);
+		tanks[1] = Tank(Enemy1X, Enemy1Y, 8, &badTank1, 1);
+		tanks[2] = Tank(Enemy2X, Enemy2Y, 0, &badTank2, 3);
+		tanks[3] = Tank(Enemy3X, Enemy3Y, 0, &badTank2, 3);
+		tanks[4] = Tank(Enemy4X, Enemy4Y, 12, &badTank3, 2);
+
 
 		for (Tank& tank : tanks)
 		{
-			tanks[0].setPosition(TankX, TankY);
-			tanks[1].setPosition(Enemy1X, Enemy1Y);
-			tanks[0].setFrame(framePlayer);
-			tanks[1].setFrame(frameEnemy);
+			//tanks[0].setPosition(TankX, TankY);
+			//tanks[0].setFrame(8);
+			//tanks[1].setFrame(8);
+			//tanks[2].setFrame(8);
+			//tanks[3].setFrame(8);
+			//tanks[4].setFrame(8);
 		}
 
 		item[0] = Item(itemX, itemY);
@@ -104,13 +116,13 @@ namespace Tmpl8
 		//combination down and left = 8
 
 		
-		bullets[0] = Bullets(214, 450, 5, 240.0f, 214, 450, 1);
-		bullets[1] = Bullets(214, 225, 5, 240.0f, 214, 450, 1);
+		bullets[0] = Bullets(6 * 32 + 14, 14 * 32 + 7, 5, 240.0f, 6 * 32 + 14, 14 * 32 + 7, 1);
+		bullets[1] = Bullets(6 * 32 + 14, 13 * 32 + 7, 5, 240.0f, 6 * 32 + 14, 14 * 32 + 7, 1);
+		bullets[2] = Bullets(14 * 32 + 14, 12 * 32 + 7, 5, 240.0f, 14 * 32 + 14, 12 * 32 + 7, 1);
+		bullets[3] = Bullets(14 * 32 + 14, 6 * 32 + 7, 5, 240.0f, 14 * 32 + 14, 12 * 32 + 7, 1);
 
-		bullets[2] = Bullets(14 * 32 + 2 + 14, 12 * 32, 5, 240.0f, 14 * 32 + 2 + 14, 12 * 32, 1);
-		bullets[3] = Bullets(14 * 32 + 2 + 14, 6 * 32, 5, 240.0f, 14 * 32 + 2 + 14, 12 * 32, 1);
-
-
+		bullets[4] = Bullets(23 * 32 + 25, 2 * 32 - 25, 5, 80.0f, 23 * 32 + 25, 2 * 32 - 25, 8);
+		bullets[5] = Bullets(17 * 32 + 25, 7 * 32 - 25, 5, 300.0f, 17 * 32 + 25, 7 * 32 - 25, 8);
 	}
 	
 	// -----------------------------------------------------------
@@ -138,6 +150,13 @@ namespace Tmpl8
 		return map[(int)ty][(int)tx * 3 + 2] != 'X';
 	}
 
+	bool Game::CheckGun(float x, float y)
+	{
+		float tx = (x) / (32.0f), ty = (y) / (32.0f);
+		return map[(int)ty][(int)tx * 3 + 2] != '1' &&
+			map[(int)ty][(int)tx * 3 + 2] != '8';
+	}
+
 	// -----------------------------------------------------------
 	// Main application tick function
 	// -----------------------------------------------------------
@@ -146,7 +165,7 @@ namespace Tmpl8
 		if (show_startscreen)
 		{
 			screen->Clear(0);
-			start_screen.drawButton_startscreen();
+			start_screen.drawButton(0, 3);
 			start_screen.detectMouse(mouseX, mouseY);
 			start_screen.detectButton(0, 3);
 			start_screen.buttonCase(show_startscreen, show_game, show_controls);
@@ -155,12 +174,14 @@ namespace Tmpl8
 			screen->PrintScaled("PLAY", 375, 400, 2, 2, 0XFFFFFF);
 			screen->PrintScaled("CONTROLS", 100, 400, 2, 2, 0xffffff);
 			screen->PrintScaled("EXIT", 625, 400, 2, 2, 0xffffff);
+			screen->PrintScaled("welcome", 20, 20, 2, 2, 0xffffff);
+			mouse.Draw(screen, mouseX - 12, mouseY - 12);
 		}
 
 		if (show_controls)
 		{
 			screen->Clear(0);
-			start_screen.drawButton_controls();
+			start_screen.drawButton(3, 4);
 			start_screen.detectMouse(mouseX, mouseY);
 			start_screen.detectButton(3, 4);
 			start_screen.buttonCase(show_startscreen, show_game, show_controls);
@@ -171,6 +192,7 @@ namespace Tmpl8
 			screen->PrintScaled("ARROW KEY LEFT - LEFT", 50, 150, 2, 2, 0XFFFFFF);
 			screen->PrintScaled("ARROW KEY DOWN - DOWN", 50, 180, 2, 2, 0XFFFFFF);
 			screen->PrintScaled("ARROW KEY RIGHT - RIGHT", 50, 210, 2, 2, 0XFFFFFF);
+			mouse.Draw(screen, mouseX - 12, mouseY - 12);
 		} 
 
 		if (show_game)
@@ -236,6 +258,31 @@ namespace Tmpl8
 					DrawTile(tx, ty, screen, x * 32, y * 32);
 				}
 
+			for (int y = 0; y < 16; y++)
+				for (int x = 0; x < 25; x++)
+				{
+					if (map[y][x * 3 + 2] == '1')
+					{
+						gun1.Draw(screen, x * 32 + 2, y * 32 + 10);
+						gun1.SetFrame(0);
+						screen->Box(x * 32, y * 32, x * 32 + 32, y * 32 + 32, 0xff0000);
+					}
+
+					if (map[y][x * 3 + 2] == '5')
+					{
+						gun2.Draw(screen, x * 32 - 2, y * 32 + 7);
+						gun2.SetFrame(4);
+						screen->Box(x * 32, y * 32, x * 32 + 32, y * 32 + 32, 0xff0000);
+					}
+
+					if (map[y][x * 3 + 2] == '8')
+					{
+						gun3.Draw(screen, x * 32, y * 32 + 6);
+						gun3.SetFrame(20);
+						screen->Box(x * 32, y * 32, x * 32 + 32, y * 32 + 32, 0xff0000);
+					}
+				}
+
 			//numbers printed
 			char msg1[256];
 			snprintf(msg1, 256, "Lives: %i", lives);
@@ -249,10 +296,14 @@ namespace Tmpl8
 			for (Tank& tank : tanks)
 			{
 				tank.Draw(*screen);
+				tanks[0].Box(*screen, 0xff00ff);
+				tanks[1].Box(*screen, 0xff0000);
+				tanks[2].Box(*screen, 0xff0000);
+				tanks[3].Box(*screen, 0xff0000);
+				tanks[4].Box(*screen, 0xff0000);
 			}
 
-			tanks[0].Box(*screen, 0xff00ff);
-			tanks[1].Box(*screen, 0xff0000);
+
 
 			for (Item& items : item)
 			{
@@ -265,9 +316,6 @@ namespace Tmpl8
 			{
 				bullet.draw(screen);
 			}
-
-			gun.Draw(screen, 200, 460);
-			gun.Draw(screen, 14 * 32 + 2, 12 * 32 + 9);
 		}
 	}
 

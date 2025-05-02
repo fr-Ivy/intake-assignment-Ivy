@@ -21,22 +21,10 @@ void Item::move()
     float nx = x;
     float ny = y;
 
-    nx = static_cast<float>(IRand(ScreenWidth));
-    ny = static_cast<float>(IRand(ScreenHeight));
-
- /*   if (Game::CheckPos(nx, ny) &&
-        Game::CheckPos(nx + 15.0f, ny + 15.0f) &&
-        Game::CheckPos(nx + 15.0f, ny) &&
-        Game::CheckPos(nx, ny + 15.0f))
-    {
-        x = nx;
-        y = ny;
-    } */
-
     do
     {
-        nx = static_cast<float>(IRand(ScreenWidth));
-        ny = static_cast<float>(IRand(ScreenHeight));
+        nx = IRand(ScreenWidth);
+        ny = IRand(ScreenHeight);
 
     } while (!Game::CheckPos(nx, ny) ||
         !Game::CheckPos(nx + 15.0f, ny + 15.0f) ||

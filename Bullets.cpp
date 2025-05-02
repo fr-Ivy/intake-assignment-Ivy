@@ -10,6 +10,7 @@ Bullets::Bullets(float const x, float const y, float const r, float const speed,
     this->beginX = beginX;
     this->beginY = beginY;
     this->speed = speed;
+    this->direction = direction;
 }
 
 
@@ -37,11 +38,36 @@ void Bullets::move(float deltaTime)
         x -= speed * deltaTime;
     }
 
+    if (direction == 5)
+    {
+        x += speed * deltaTime;
+        y -= speed * deltaTime;
+    }
+
+    if (direction == 6)
+    {
+        x -= speed * deltaTime;
+        y -= speed * deltaTime;
+    }
+
+    if (direction == 7)
+    {
+        x += speed * deltaTime;
+        y += speed * deltaTime;
+    }
+
+    if (direction == 8)
+    {
+        x -= speed * deltaTime;
+        y += speed * deltaTime;
+    }
+
     if (!Game::CheckPos(x - r, y - r) ||
         !Game::CheckPos(x + r, y + r) ||
         !Game::CheckPos(x - r, y + r) ||
         !Game::CheckPos(x + r, y - r))
     {
+        x = beginX;
         y = beginY;
     }
 }
