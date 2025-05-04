@@ -1,5 +1,8 @@
 #pragma once
 #include "surface.h"
+
+namespace Tmpl8 { class Game; }
+
 class Bullets
 {
 public:
@@ -10,10 +13,13 @@ public:
 	void draw(Tmpl8::Surface* surface);
 
 	int getX() const { return x; }
-
 	int getY() const { return y; }
-
 	int get_r() const { return r; }
+
+	bool isActive = false;
+	void setActive(bool active) { isActive = active; }
+	bool getActive() const { return isActive; }
+
 
 
 private:

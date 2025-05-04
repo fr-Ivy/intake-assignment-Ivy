@@ -1,5 +1,7 @@
 #pragma once
 #include "template.h"
+#include "Tank.h"
+#include "Bullets.h"
 
 namespace Tmpl8 {
 
@@ -37,6 +39,8 @@ public:
 	static bool CheckPos(float x, float y);
 	static bool CheckGun(float x, float y);
 	void drawGun();
+	Tank* getTanks() { return tanks; }
+	Bullets* getBullets() { return bullets; }
 
 private:
 	Surface* screen;
@@ -52,8 +56,21 @@ private:
 
 	int mouseX = 0;
 	int mouseY = 0;
-
 	bool clicked = false;
-};
 
+	Tank tanks[6];
+	Bullets bullets[6];
+
+	bool tank1 = false;
+	bool tank2 = false;
+	bool tank3 = false;
+	bool tank4 = false;
+
+	bool bullet0 = false;
+	bool bullet1 = false;
+	bool bullet2 = false;
+	bool bullet3 = false;
+	bool bullet4 = false;
+	bool bullet5 = false;
+};
 }; // namespace Tmpl8

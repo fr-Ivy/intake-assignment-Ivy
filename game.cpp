@@ -1,24 +1,25 @@
 #include "game.h"
 #include "surface.h"
 #include <cstdio> //printf
-#include "Tank.h"
 #include "Item.h"
 #include "Gun.h"
 #include "Bullets.h"
+#include "spawn_objects.h"
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h> //controls
 #include "startscreen.h"
 #include <vector>
+#include <iostream>
 
 
 namespace Tmpl8
 {
 	static char map[16][76] =
 	{
-		"aaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXda8",
-		"cbXfb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb cbX",
-		"cbXfb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb cbX",
-		"cbXfb fb fb fb fb fb fb fb fb fb adXfb fb fb fb fb fb adXfb fb fb fb fb cbX",
+		"aaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXcaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXda8",
+		"cbXfb fb fb fb fb fb fb fb fb fb cbXfb fb fb fb fb fb fb fb fb fb fb fb cbX",
+		"cbXfb fb fb fb fb fb fb fb fb fb cbXfb fb fb fb fb fb fb fb fb fb fb fb cbX",
+		"cbXfb fb fb fb fb fb fb fb fb fb cbXfb fb fb fb fb fb adXfb fb fb fb fb cbX",
 		"cbXfb fb fb fb fb fb fb fb fb fb cbXfb fb fb fb fb fb cbXfb fb fb fb fb cbX",
 		"abXcdXcdXcdXcdXcdXbcXfb fb bdXcdXddXfb fb fb fb fb fb ac8baXneXbcXfb fb cbX",
 		"cbXfb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb cbX",
@@ -50,7 +51,6 @@ namespace Tmpl8
 	float Enemy2X = 12.0f * 32.0f, Enemy2Y = 1.0f * 32.0f;
 	float Enemy3X = 11.0f * 32.0f, Enemy3Y = 6.0f * 32.0f;
 	float Enemy4X = 1.0f * 32.0f, Enemy4Y = 4.0f * 32.0f;
-	Tank tanks[6];
 	Item item[1];
 	int itemX = 45;
 	int itemY = 45;
@@ -59,15 +59,13 @@ namespace Tmpl8
 	float cooldown3 = 500.0f;
 	float time = 0;
 
-	//Gun guns[1];
-//	Gun bullets[10];
 	int gunX1 = 400;
 	int gunY1 = 200;
 	int bulletFrame = 1;
 	float Seconds = 0.0f;
 	int amount = 0;
-	Bullets bullets[10];
 	startscreen start_screen;
+	spawn_objects spawn;
 
 	void Game::Init()
 	{
@@ -118,11 +116,13 @@ namespace Tmpl8
 		
 		bullets[0] = Bullets(6 * 32 + 14, 14 * 32 + 7, 5, 240.0f, 6 * 32 + 14, 14 * 32 + 7, 1);
 		bullets[1] = Bullets(6 * 32 + 14, 13 * 32 + 7, 5, 240.0f, 6 * 32 + 14, 14 * 32 + 7, 1);
-		bullets[2] = Bullets(14 * 32 + 14, 12 * 32 + 7, 5, 240.0f, 14 * 32 + 14, 12 * 32 + 7, 1);
-		bullets[3] = Bullets(14 * 32 + 14, 6 * 32 + 7, 5, 240.0f, 14 * 32 + 14, 12 * 32 + 7, 1);
+		bullets[2] = Bullets(14 * 32 + 14, 12 * 32 + 7, 5, 200.0f, 14 * 32 + 14, 12 * 32 + 7, 1);
+		bullets[3] = Bullets(14 * 32 + 14, 6 * 32 + 7, 5, 200.0f, 14 * 32 + 14, 12 * 32 + 7, 1);
 
 		bullets[4] = Bullets(23 * 32 + 25, 2 * 32 - 25, 5, 80.0f, 23 * 32 + 25, 2 * 32 - 25, 8);
-		bullets[5] = Bullets(17 * 32 + 25, 7 * 32 - 25, 5, 300.0f, 17 * 32 + 25, 7 * 32 - 25, 8);
+		bullets[5] = Bullets(17 * 32 + 25, 7 * 32 - 25, 5, 80.0f, 17 * 32 + 25, 7 * 32 - 25, 8);
+
+		spawn.spawnObjects(*this, collected, screen);
 	}
 	
 	// -----------------------------------------------------------
@@ -215,12 +215,15 @@ namespace Tmpl8
 
 
 			//collisions
-			if (tanks[0].collision(tanks[1]))
+			for (int i = 1; i <= 5; i++)
 			{
-				if (cooldown1 <= 0.0f)
+				if (tanks[0].collision(tanks[i]) && tanks[i].getActive())
 				{
-					lives--;
-					cooldown1 = 1000.0f;
+					if (cooldown1 <= 0.0f)
+					{
+						lives--;
+						cooldown1 = 1000.0f;
+					}
 				}
 			}
 
@@ -237,14 +240,14 @@ namespace Tmpl8
 				}
 			}
 
-			for (Bullets& bullet : bullets)
+			for (int i = 0; i < 6; i++)
 			{
-				if (tanks[0].bulletCollision(bullet))
+				if (tanks[0].bulletCollision(bullets[i]) && bullets[i].getActive())
 				{
 					if (cooldown3 <= 0.0f)
 					{
 						lives--;
-						cooldown3 = 250.0f;
+						cooldown3 = 500.0f;
 					}
 				}
 			}
@@ -293,28 +296,36 @@ namespace Tmpl8
 			screen->Print(msg2, 35, 22, 0xffffff);
 
 			//draw stuff on screen
-			for (Tank& tank : tanks)
+
+			tanks[0].Draw(*screen);
+			tanks[0].Box(*screen, 0xff00ff);
+
+			for (int i = 1; i < 5; i++)
 			{
-				tank.Draw(*screen);
-				tanks[0].Box(*screen, 0xff00ff);
-				tanks[1].Box(*screen, 0xff0000);
-				tanks[2].Box(*screen, 0xff0000);
-				tanks[3].Box(*screen, 0xff0000);
-				tanks[4].Box(*screen, 0xff0000);
+				if (tanks[i].getActive())
+				{
+					tanks[i].Draw(*screen);
+					tanks[i].Box(*screen, 0xff0000);
+				}
+				//tanks[1].Box(*screen, 0xff0000);
+				//tanks[2].Box(*screen, 0xff0000);
+				//tanks[3].Box(*screen, 0xff0000);
+				//tanks[4].Box(*screen, 0xff0000);
 			}
-
-
 
 			for (Item& items : item)
 			{
 				items.draw(screen);
 			}
 
-			int amount = 0;
 			Seconds += deltaTime;
-			for (Bullets& bullet : bullets)
+			for (int i = 0; i < 6; i++)
 			{
-				bullet.draw(screen);
+				if (bullets[i].getActive())
+				{
+					bullets[i].draw(screen);
+				}
+				//bullet.draw(screen);
 			}
 		}
 	}

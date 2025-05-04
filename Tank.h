@@ -1,8 +1,10 @@
 #pragma once
-#include "game.h"
+//#include "game.h"
 #include "surface.h"
 #include "Item.h"
 #include "Bullets.h"
+
+namespace Tmpl8 { class Game; }
 
 class Tank
 {
@@ -19,6 +21,9 @@ public:
 	bool itemCollision(const Item& item) const;
 	bool bulletCollision(const Bullets& bullets) const;
 
+	bool isActive = false;
+	void setActive(bool active) { isActive = active; }
+	bool getActive() const { return isActive; }
 
 private:
 	float posX = 0.0f;

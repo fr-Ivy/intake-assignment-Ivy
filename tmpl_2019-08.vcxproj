@@ -225,6 +225,7 @@
     <ClCompile Include="Bullets.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="spawn_objects.cpp" />
     <ClCompile Include="startscreen.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="surface.cpp" />
@@ -234,6 +235,7 @@
     <ClInclude Include="Bullets.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="spawn_objects.h" />
     <ClInclude Include="startscreen.h" />
     <ClInclude Include="surface.h" />
     <ClInclude Include="Tank.h" />

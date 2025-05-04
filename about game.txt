@@ -3,8 +3,8 @@ fix:
 add:
 - everytime the tank collects an item, there should be a dangerous object added to the game
 - make a game over screen - r to restart or wait a few seconds until it restarts
-- finish the map!!!
 - controls W, A, S, D
+- set the map in another file (map.cpp & map.h)
 
 note:
 - maybe increase the amount of lives?

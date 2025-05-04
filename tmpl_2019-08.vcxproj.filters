@@ -20,6 +20,7 @@
     <ClCompile Include="startscreen.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="spawn_objects.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
@@ -41,6 +42,7 @@
     <ClInclude Include="startscreen.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="spawn_objects.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">
