@@ -121,8 +121,6 @@ namespace Tmpl8
 
 		bullets[4] = Bullets(23 * 32 + 25, 2 * 32 - 25, 5, 80.0f, 23 * 32 + 25, 2 * 32 - 25, 8);
 		bullets[5] = Bullets(17 * 32 + 25, 7 * 32 - 25, 5, 80.0f, 17 * 32 + 25, 7 * 32 - 25, 8);
-
-		spawn.spawnObjects(*this, collected, screen);
 	}
 	
 	// -----------------------------------------------------------
@@ -327,6 +325,8 @@ namespace Tmpl8
 				}
 				//bullet.draw(screen);
 			}
+
+			spawn.spawnObjects(*this, collected, screen);
 		}
 	}
 

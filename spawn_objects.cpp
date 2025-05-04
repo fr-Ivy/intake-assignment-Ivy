@@ -10,13 +10,53 @@ void spawn_objects::spawnObjects(Tmpl8::Game& objects, int& collected, Tmpl8::Su
     Tank* tanks = objects.getTanks();
     Bullets* bullets = objects.getBullets();
 
-    if (collected >= 1)
+    if (collected >= 0)
     {
-        std::cout << "Activating bullet 0" << std::endl;
-        bullets[0].setActive(true);
-        std::cout << "Bullet 0 active state: " << bullets[0].getActive() << std::endl;
+        tanks[1].setActive(true);
     }
 
+    if (collected >= 1)
+    {
+        bullets[2].setActive(true);
+    }
+
+    if (collected >= 2)
+    {
+        bullets[4].setActive(true);
+    }
+
+    if (collected >= 3)
+    {
+        bullets[0].setActive(true);
+        bullets[1].setActive(true);
+    }
+
+    if (collected >= 4)
+    {
+        tanks[3].setActive(true);
+    }
+
+    if (collected >= 5)
+    {
+        tanks[4].setActive(true);
+    }
+
+    if (collected >= 6)
+    {
+        bullets[3].setActive(true);
+    }
+
+    if (collected >= 7)
+    {
+        tanks[2].setActive(true);
+    }
+
+    if (collected >= 7)
+    {
+        bullets[5].setActive(true);
+    }
+
+    // bullets - 5
 
     // 1 - 4 tanks
     // 0 - 5 bullets
