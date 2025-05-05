@@ -5,6 +5,7 @@
 #include <iostream> // cout
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h> //controls
+#include <SDL.h>
 
 using namespace Tmpl8;
 
@@ -40,6 +41,56 @@ void Tank::Draw(Tmpl8::Surface& surface) const
     }
 }
 
+float w = 0;
+float a = 0;
+float s = 0;
+float d = 0;
+
+void Tank::KeyUp(int key)
+{
+    switch (key)
+    {
+    case SDL_SCANCODE_W:
+    case SDL_SCANCODE_UP:
+        w = 0.0f;
+        break;
+    case SDL_SCANCODE_A:
+    case SDL_SCANCODE_LEFT:
+        a = 0.0f;
+        break;
+    case SDL_SCANCODE_S:
+    case SDL_SCANCODE_DOWN:
+        s = 0.0f;
+        break;
+    case SDL_SCANCODE_D:
+    case SDL_SCANCODE_RIGHT:
+        d = 0.0f;
+        break;
+    }
+}
+
+void Tank::KeyDown(int key)
+{
+    switch (key)
+    {
+    case SDL_SCANCODE_W:
+    case SDL_SCANCODE_UP:
+        w = 1.0f;
+        break;
+    case SDL_SCANCODE_A:
+    case SDL_SCANCODE_LEFT:
+        a = 1.0f;
+        break;
+    case SDL_SCANCODE_S:
+    case SDL_SCANCODE_DOWN:
+        s = 1.0f;
+        break;
+    case SDL_SCANCODE_D:
+    case SDL_SCANCODE_RIGHT:
+        d = 1.0f;
+        break;
+    }
+}
 
 void Tank::move(float deltaTime, bool& resetTankPos)
 {
@@ -50,19 +101,19 @@ void Tank::move(float deltaTime, bool& resetTankPos)
         float nx = posX;
         float ny = posY;
 
-        if (GetAsyncKeyState(VK_LEFT)) {
+        if (a == 1.0f) {
             nx -= moveSpeed * deltaTime;
             frame = 12;
         }
-        if (GetAsyncKeyState(VK_RIGHT)) {
+        if (d == 1.0f) {
             nx += moveSpeed * deltaTime;
             frame = 4;
         }
-        if (GetAsyncKeyState(VK_UP)) {
+        if (w == 1.0f) {
             ny -= moveSpeed * deltaTime;
             frame = 8;
         }
-        if (GetAsyncKeyState(VK_DOWN)) {
+        if (s == 1.0f) {
             ny += moveSpeed * deltaTime;
             frame = 0;
         }

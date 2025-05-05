@@ -85,15 +85,6 @@ namespace Tmpl8
 		tanks[4] = Tank(Enemy4X, Enemy4Y, 12, &badTank3, 2);
 
 
-		for (Tank& tank : tanks)
-		{
-			//tanks[0].setPosition(TankX, TankY);
-			//tanks[0].setFrame(8);
-			//tanks[1].setFrame(8);
-			//tanks[2].setFrame(8);
-			//tanks[3].setFrame(8);
-			//tanks[4].setFrame(8);
-		}
 
 		item[0] = Item(itemX, itemY);
 
@@ -186,10 +177,10 @@ namespace Tmpl8
 			start_screen.mouseClick(clicked);
 
 			screen->PrintScaled("BACK", 700, 45, 3, 3, 0XFFFFFF);
-			screen->PrintScaled("ARROW KEY UP - UP", 50, 120, 2, 2, 0XFFFFFF);
-			screen->PrintScaled("ARROW KEY LEFT - LEFT", 50, 150, 2, 2, 0XFFFFFF);
-			screen->PrintScaled("ARROW KEY DOWN - DOWN", 50, 180, 2, 2, 0XFFFFFF);
-			screen->PrintScaled("ARROW KEY RIGHT - RIGHT", 50, 210, 2, 2, 0XFFFFFF);
+			screen->PrintScaled("ARROW KEY UP/W - UP", 50, 120, 2, 2, 0XFFFFFF);
+			screen->PrintScaled("ARROW KEY LEFT/A - LEFT", 50, 150, 2, 2, 0XFFFFFF);
+			screen->PrintScaled("ARROW KEY DOWN/S - DOWN", 50, 180, 2, 2, 0XFFFFFF);
+			screen->PrintScaled("ARROW KEY RIGHT/D - RIGHT", 50, 210, 2, 2, 0XFFFFFF);
 			mouse.Draw(screen, mouseX - 12, mouseY - 12);
 		} 
 
@@ -305,10 +296,6 @@ namespace Tmpl8
 					tanks[i].Draw(*screen);
 					tanks[i].Box(*screen, 0xff0000);
 				}
-				//tanks[1].Box(*screen, 0xff0000);
-				//tanks[2].Box(*screen, 0xff0000);
-				//tanks[3].Box(*screen, 0xff0000);
-				//tanks[4].Box(*screen, 0xff0000);
 			}
 
 			for (Item& items : item)
@@ -323,7 +310,6 @@ namespace Tmpl8
 				{
 					bullets[i].draw(screen);
 				}
-				//bullet.draw(screen);
 			}
 
 			spawn.spawnObjects(*this, collected, screen);

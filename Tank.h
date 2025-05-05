@@ -16,6 +16,8 @@ public:
 	void setFrame(int const frame);
 	void Draw(Tmpl8::Surface& surface) const;
 	void move(float deltaTime, bool& resetTankPos);
+	void KeyUp(int key);
+	void KeyDown(int key);
 	void Box(const Tmpl8::Surface& surface, Tmpl8::Pixel const color = 0) const;
 	bool collision(const Tank& other) const;
 	bool itemCollision(const Item& item) const;

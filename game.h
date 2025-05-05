@@ -34,8 +34,8 @@ public:
 		mouseX += x; mouseY += y; 
 
 	}
-	void KeyUp( int key ) { /* implement if you want to handle keys */ }
-	void KeyDown(int key) { theKey = key; }
+	void KeyUp(int key) { tanks[0].KeyUp(key); }
+	void KeyDown(int key) { tanks[0].KeyDown(key); }
 	static bool CheckPos(float x, float y);
 	static bool CheckGun(float x, float y);
 	void drawGun();
@@ -44,7 +44,6 @@ public:
 
 private:
 	Surface* screen;
-	int theKey = 0;
 	int lives = 3;
 	int collected = 0;
 
@@ -60,6 +59,7 @@ private:
 	bool clicked = false;
 
 	Tank tanks[6];
+	//Tank tank;
 	Bullets bullets[6];
 
 	bool tank1 = false;
