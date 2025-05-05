@@ -70,8 +70,10 @@ namespace Tmpl8
 				{300, 375, 200, 60},
 				{550, 375, 200, 60},
 				{680, 20, 100, 60},
-				{150, 375, 200, 60},
-				{450, 375, 200, 60}
+				{150, 300, 200, 60},
+				{450, 300, 200, 60},
+				{150, 300, 200, 60},
+				{450, 300, 200, 60}
 			};
 
 		start_screen = startscreen(screen, button);
@@ -330,11 +332,25 @@ namespace Tmpl8
 			{
 				show_gameover = true;
 			}
+
+			if (collected >= 8 && !show_gameover && !show_startscreen && !show_controls)
+			{
+				show_win = true;
+			}
 		}
 
 		if (show_win)
 		{
+			screen->Clear(0);
+			start_screen.drawButton(6, 8);
+			start_screen.detectMouse(mouseX, mouseY);
+			start_screen.detectButton(6, 8);
+			start_screen.mouseClick(clicked);
+			mouse.Draw(screen, mouseX - 12, mouseY - 12);
 
+			screen->PrintScaled("RETRY", 225, 325, 2, 2, 0XFFFFFF);
+			screen->PrintScaled("MENU", 525, 325, 2, 2, 0XFFFFFF);
+			screen->PrintScaled("YOU WON", 275, 200, 5, 5, 0XFFFFFF);
 		}
 
 		if (show_gameover)
@@ -345,6 +361,10 @@ namespace Tmpl8
 			start_screen.detectButton(4, 6);
 			start_screen.mouseClick(clicked);
 			mouse.Draw(screen, mouseX - 12, mouseY - 12);
+
+			screen->PrintScaled("RETRY", 225, 325, 2, 2, 0XFFFFFF);
+			screen->PrintScaled("MENU", 525, 325, 2, 2, 0XFFFFFF);
+			screen->PrintScaled("GAME OVER", 275, 200, 5, 5, 0XFFFFFF);
 		}
 	}
 

@@ -1,7 +1,6 @@
 fix:
 
 add:
-- make a game over screen - r to restart or wait a few seconds until it restarts
 - controls W, A, S, D
 - set the map in another file (map.cpp & map.h)
 
