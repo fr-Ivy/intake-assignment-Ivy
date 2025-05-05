@@ -21,7 +21,7 @@ namespace Tmpl8
 		"cbXfb fb fb fb fb fb fb fb fb fb cbXfb fb fb fb fb fb fb fb fb fb fb fb cbX",
 		"cbXfb fb fb fb fb fb fb fb fb fb cbXfb fb fb fb fb fb adXfb fb fb fb fb cbX",
 		"cbXfb fb fb fb fb fb fb fb fb fb cbXfb fb fb fb fb fb cbXfb fb fb fb fb cbX",
-		"abXcdXcdXcdXcdXcdXbcXfb fb bdXcdXddXfb fb fb fb fb fb ac8baXneXbcXfb fb cbX",
+		"abXcdXcdXcdXcdXcdXbcXfb fb bdXcdXddXfb fb fb fb fb fb ac8baXbaXbcXfb fb cbX",
 		"cbXfb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb cbX",
 		"cbXfb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb cbX",
 		"cbXfb fb fb adXfb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb cbX",
@@ -49,7 +49,7 @@ namespace Tmpl8
 	float TankX = 23.0f * 32.0f, TankY = 14.0f * 32.0f;
 	float Enemy1X = 20.0f * 32.0f, Enemy1Y = 10.0f * 32.0f;
 	float Enemy2X = 12.0f * 32.0f, Enemy2Y = 1.0f * 32.0f;
-	float Enemy3X = 11.0f * 32.0f, Enemy3Y = 6.0f * 32.0f;
+	float Enemy3X = 11.0f * 32.0f, Enemy3Y = 10.0f * 32.0f;
 	float Enemy4X = 1.0f * 32.0f, Enemy4Y = 4.0f * 32.0f;
 	Item item[1];
 	int itemX = 45;
@@ -57,13 +57,8 @@ namespace Tmpl8
 	float cooldown1 = 1000.0f;
 	float cooldown2 = 1000.0f;
 	float cooldown3 = 500.0f;
-	float time = 0;
-
-	int gunX1 = 400;
-	int gunY1 = 200;
-	int bulletFrame = 1;
 	float Seconds = 0.0f;
-	int amount = 0;
+
 	startscreen start_screen;
 	spawn_objects spawn;
 
@@ -74,7 +69,9 @@ namespace Tmpl8
 				{50, 375, 200, 60},
 				{300, 375, 200, 60},
 				{550, 375, 200, 60},
-				{680, 20, 100, 60}
+				{680, 20, 100, 60},
+				{150, 375, 200, 60},
+				{450, 375, 200, 60}
 			};
 
 		start_screen = startscreen(screen, button);
@@ -82,7 +79,7 @@ namespace Tmpl8
 		tanks[0] = Tank(TankX, TankY, 8, &tank, 0);
 		tanks[1] = Tank(Enemy1X, Enemy1Y, 8, &badTank1, 1);
 		tanks[2] = Tank(Enemy2X, Enemy2Y, 0, &badTank2, 3);
-		tanks[3] = Tank(Enemy3X, Enemy3Y, 0, &badTank2, 3);
+		tanks[3] = Tank(Enemy3X, Enemy3Y, 0, &badTank2, 1);
 		tanks[4] = Tank(Enemy4X, Enemy4Y, 12, &badTank3, 2);
 
 
@@ -160,13 +157,15 @@ namespace Tmpl8
 	// -----------------------------------------------------------
 	void Game::Tick(float deltaTime)
 	{
+		start_screen.buttonCase(show_startscreen, show_game, show_controls, show_gameover, show_win, 
+			lives, collected, resetTankPos, clicked);
+
 		if (show_startscreen)
 		{
 			screen->Clear(0);
 			start_screen.drawButton(0, 3);
 			start_screen.detectMouse(mouseX, mouseY);
 			start_screen.detectButton(0, 3);
-			start_screen.buttonCase(show_startscreen, show_game, show_controls);
 			start_screen.mouseClick(clicked);
 
 			screen->PrintScaled("PLAY", 375, 400, 2, 2, 0XFFFFFF);
@@ -182,7 +181,6 @@ namespace Tmpl8
 			start_screen.drawButton(3, 4);
 			start_screen.detectMouse(mouseX, mouseY);
 			start_screen.detectButton(3, 4);
-			start_screen.buttonCase(show_startscreen, show_game, show_controls);
 			start_screen.mouseClick(clicked);
 
 			screen->PrintScaled("BACK", 700, 45, 3, 3, 0XFFFFFF);
@@ -203,7 +201,7 @@ namespace Tmpl8
 
 			for (Tank& tank : tanks)
 			{
-				tank.move(deltaTime);
+				tank.move(deltaTime, resetTankPos);
 			}
 
 			for (Bullets& bullet : bullets)
@@ -327,6 +325,26 @@ namespace Tmpl8
 			}
 
 			spawn.spawnObjects(*this, collected, screen);
+
+			if (lives <= 0 && !show_win && !show_startscreen && !show_controls)
+			{
+				show_gameover = true;
+			}
+		}
+
+		if (show_win)
+		{
+
+		}
+
+		if (show_gameover)
+		{
+			screen->Clear(0);
+			start_screen.drawButton(4, 6);
+			start_screen.detectMouse(mouseX, mouseY);
+			start_screen.detectButton(4, 6);
+			start_screen.mouseClick(clicked);
+			mouse.Draw(screen, mouseX - 12, mouseY - 12);
 		}
 	}
 

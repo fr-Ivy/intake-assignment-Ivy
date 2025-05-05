@@ -43,36 +43,77 @@ void startscreen::detectButton(int const start, int const end) //which buttons s
 
 void startscreen::mouseClick(bool clicked)
 {
-	if (button_detected >= 0 && clicked && button_detected < button.size())
+	if (clicked)
 	{
-		case_number = button_detected;
-		//std::cout << case_number << std::endl;
+		if (button_detected >= 0 && clicked && button_detected < button.size())
+		{
+			case_number = button_detected;
+			//std::cout << case_number << std::endl;
+		}
+	}
+	else
+	{
+		case_number = -1;
+		
 	}
 }
 
-void startscreen::buttonCase(bool& show_startscreen, bool& show_game, bool& show_controls) const
+void startscreen::buttonCase(bool& show_startscreen, bool& show_game, bool& show_controls, bool& show_gameover, bool& show_win, 
+	int& lives, int& collected, bool& resetTankPos, bool clicked) const
 {
-	//std::cout << "Case number: " << case_number << std::endl;
+	std::cout << "Case number: " << case_number << std::endl;
 	switch (case_number)
 	{
 	case 0: // controls
 		show_startscreen = false;
 		show_controls = true;
-		//std::cout << "Controls button pressed" << std::endl;
+		std::cout << "Controls button pressed" << std::endl;
 		break;
 	case 1: // play
 		show_game = true;
 		show_startscreen = false;
-		//std::cout << "Play button pressed" << std::endl;
+		show_gameover = false;
+		std::cout << "Play button pressed" << std::endl;
+
+		if (clicked)
+		{
+			resetTankPos = true;
+
+			lives = 3;
+			collected = 0;
+		}
+
 		break;
 	case 2: // exit
 		exit(0);
-		//std::cout << "Exit button pressed" << std::endl;
+		std::cout << "Exit button pressed" << std::endl;
 		break;
 	case 3:
-		//std::cout << "Back button pressed" << std::endl;
+		std::cout << "Back button pressed" << std::endl;
 		show_startscreen = true;
 		show_controls = false;
 		break;
+	case 4:
+		show_game = true;
+		show_gameover = false;
+		std::cout << "retry button pressed" << std::endl;
+
+		if (clicked)
+		{
+			resetTankPos = true;
+
+			lives = 3;
+			collected = 0;
+		}
+		break;
+	case 5:
+		show_startscreen = true;
+		show_gameover = false;
+		std::cout << "menu button clicked" << std::endl;
+		break;
+	case -1:
+		break;
 	}
+
 }
+	

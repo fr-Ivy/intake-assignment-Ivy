@@ -41,7 +41,7 @@ void Tank::Draw(Tmpl8::Surface& surface) const
 }
 
 
-void Tank::move(float deltaTime)
+void Tank::move(float deltaTime, bool& resetTankPos)
 {
     deltaTime /= 1000.0f;
     if (behaviour == 0)
@@ -78,6 +78,13 @@ void Tank::move(float deltaTime)
         {
             posX = nx;
             posY = ny;
+        }
+
+        if (resetTankPos)
+        {
+            posX = beginX;
+            posY = beginY;
+            resetTankPos = false;
         }
     }
 
@@ -125,7 +132,7 @@ bool Tank::collision(const Tank& other) const
 {
 	if (posX <= other.posX + 32 && posY <= other.posY + 32 && posX + 32 >= other.posX && posY + 32 >= other.posY)
 	{
-		std::cout << "Hit by a tank!" << std::endl;
+		//std::cout << "Hit by a tank!" << std::endl;
 		return true;
 	}
 	return false;
@@ -136,7 +143,7 @@ bool Tank::itemCollision(const Item& item) const
 
     if (posX <= item.getX() + 15 && posY <= item.getY() + 15 && posX + 32 >= item.getX() && posY + 32 >= item.getY())
     {
-        std::cout << "Item, YAYYYY!" << std::endl;
+        //std::cout << "Item, YAYYYY!" << std::endl;
         return true;
     }
     return false;
@@ -150,7 +157,7 @@ bool Tank::bulletCollision(const Bullets& bullets) const
         posX + 32 + bullets.get_r() >= bullets.getX() &&
         posY + 32 + bullets.get_r() >= bullets.getY())
     {
-        std::cout << "a Bullet! ouch!" << std::endl;
+        //std::cout << "a Bullet! ouch!" << std::endl;
         return true;
     }
     return false;

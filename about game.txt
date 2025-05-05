@@ -1,7 +1,6 @@
 fix:
 
 add:
-- everytime the tank collects an item, there should be a dangerous object added to the game
 - make a game over screen - r to restart or wait a few seconds until it restarts
 - controls W, A, S, D
 - set the map in another file (map.cpp & map.h)
@@ -12,3 +11,4 @@ note:
 
 if there is time left (probably not (stupid exams)) add:
 - hearts in the game that the tank can collect to increase its amount of lives
+- option to keep playing after player collected 9 item or to go to the main menu

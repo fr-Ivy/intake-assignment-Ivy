@@ -52,7 +52,8 @@ private:
 	bool show_startscreen = true;
 	bool show_gameover = false;
 	bool show_controls = false;
-	bool exit = false;
+	bool show_win = false;
+	bool resetTankPos = false;
 
 	int mouseX = 0;
 	int mouseY = 0;
