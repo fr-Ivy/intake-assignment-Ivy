@@ -300,7 +300,7 @@ namespace Tmpl8
 
 			for (Item& items : item)
 			{
-				items.draw(screen);
+				items.draw(*screen);
 			}
 
 			Seconds += deltaTime;
@@ -308,11 +308,11 @@ namespace Tmpl8
 			{
 				if (bullets[i].getActive())
 				{
-					bullets[i].draw(screen);
+					bullets[i].draw(*screen);
 				}
 			}
 
-			spawn.spawnObjects(*this, collected, screen);
+			spawn.spawnObjects(*this, collected, *screen);
 
 			if (lives <= 0 && !show_win && !show_startscreen && !show_controls)
 			{

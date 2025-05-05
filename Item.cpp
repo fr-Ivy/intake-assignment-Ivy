@@ -50,7 +50,7 @@ void Item::move()
 }
 
 
-void Item::draw(Tmpl8::Surface* surface)
+void Item::draw(Tmpl8::Surface& surface)
 {
-	surface->Box(x, y, x + 15, y + 15, 0x204299);
+	surface.Box(x, y, x + 15, y + 15, 0x204299);
 }

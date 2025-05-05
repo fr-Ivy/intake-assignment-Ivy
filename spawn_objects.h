@@ -8,7 +8,7 @@ public:
 	spawn_objects() = default;
 	~spawn_objects() = default;
 
-	void spawnObjects(Tmpl8::Game& objects, int& collected, Tmpl8::Surface* surface);
+	void spawnObjects(Tmpl8::Game& objects, int& collected, Tmpl8::Surface& surface);
 
 
 private:

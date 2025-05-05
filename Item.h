@@ -10,7 +10,7 @@ public:
 	~Item() = default;
 	void setPosition(float x, float y);
 	void move();
-	void draw(Tmpl8::Surface* surface);
+	void draw(Tmpl8::Surface& surface);
 	float getX() const {return x;}
 	float getY() const {return y;}
 
