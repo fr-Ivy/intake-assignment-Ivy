@@ -3,7 +3,7 @@
 
 //spawn_objects::spawn_objects() {}
 
-void spawn_objects::spawnObjects(Tmpl8::Game& objects, int& collected, Tmpl8::Surface& surface)
+void spawn_objects::spawnObjects(Tmpl8::Game& objects, const int& collected, Tmpl8::Surface& surface)
 {
    // std::cout << "Collected: " << collected << std::endl;
 

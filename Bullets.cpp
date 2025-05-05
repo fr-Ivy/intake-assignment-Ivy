@@ -72,7 +72,7 @@ void Bullets::move(float deltaTime)
     }
 }
 
-void Bullets::draw(Surface& surface)
+void Bullets::draw(Surface& surface) const
 {
     for (int i = 0; i < 64; i++)
     {

@@ -16,9 +16,9 @@ public:
 	void drawButton(int const start, int const end) const;
 	void detectMouse(int mouse_x, int mouse_y);
 	void detectButton(int const start, int const end);
-	void mouseClick(bool clicked);
+	void mouseClick(bool const clicked);
 	void buttonCase(bool& show_startscreen, bool& show_game, bool& show_controls, bool& show_gameover, bool& show_win, 
-		int& lives, int& collected, bool& resetTankPos, bool clicked) const;
+		int& lives, int& collected, bool& resetTankPos, bool const clicked) const;
 
 
 private:

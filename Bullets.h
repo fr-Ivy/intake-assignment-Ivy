@@ -10,7 +10,7 @@ public:
 	Bullets(float const x, float const y, float const r, float const speed, float const beginX, float const beginY, int const direction);
 	~Bullets() = default;
 	void move(float deltaTime);
-	void draw(Tmpl8::Surface& surface);
+	void draw(Tmpl8::Surface& surface) const;
 
 	int getX() const { return x; }
 	int getY() const { return y; }

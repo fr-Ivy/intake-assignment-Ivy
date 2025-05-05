@@ -97,7 +97,7 @@ void Tank::move(float deltaTime, bool& resetTankPos)
     deltaTime /= 1000.0f;
     if (behaviour == 0)
     {
-        float moveSpeed = 200.0f;
+        float const moveSpeed = 200.0f;
         float nx = posX;
         float ny = posY;
 

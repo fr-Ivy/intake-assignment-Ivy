@@ -41,7 +41,7 @@ void startscreen::detectButton(int const start, int const end) //which buttons s
 
 }
 
-void startscreen::mouseClick(bool clicked)
+void startscreen::mouseClick(bool const clicked)
 {
 	if (clicked)
 	{
@@ -58,7 +58,7 @@ void startscreen::mouseClick(bool clicked)
 }
 
 void startscreen::buttonCase(bool& show_startscreen, bool& show_game, bool& show_controls, bool& show_gameover, bool& show_win, 
-	int& lives, int& collected, bool& resetTankPos, bool clicked) const
+	int& lives, int& collected, bool& resetTankPos, bool const clicked) const
 {
 	std::cout << "Case number: " << case_number << std::endl;
 	switch (case_number)

@@ -33,24 +33,10 @@ void Item::move()
 
     x = nx;
     y = ny;
-
-    /*
-    do
-    {
-         nx = IRand(SW);
-         ny = IRand(SH):
-    } while(a && b);
-    // Reverse logic
-    do
-    {
-          nx = IRand(SW);
-         ny = IRand(SH):
-    } while(!a || !b);
-*/
 }
 
 
-void Item::draw(Tmpl8::Surface& surface)
+void Item::draw(Tmpl8::Surface& surface) const
 {
 	surface.Box(x, y, x + 15, y + 15, 0x204299);
 }
