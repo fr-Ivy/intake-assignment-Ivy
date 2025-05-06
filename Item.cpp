@@ -7,7 +7,6 @@ Item::Item(float const x, float const y)
 {
 	this->x = x;
 	this->y = y;
-
 }
 
 void Item::setPosition(float const x, float const y)

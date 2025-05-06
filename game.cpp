@@ -257,44 +257,55 @@ namespace Tmpl8
 					{
 						gun1.Draw(screen, x * 32 + 2, y * 32 + 10);
 						gun1.SetFrame(0);
+#ifdef _DEBUG
+
 						screen->Box(x * 32, y * 32, x * 32 + 32, y * 32 + 32, 0xff0000);
+#endif
 					}
 
 					if (map[y][x * 3 + 2] == '5')
 					{
 						gun2.Draw(screen, x * 32 - 2, y * 32 + 7);
 						gun2.SetFrame(4);
+#ifdef _DEBUG
 						screen->Box(x * 32, y * 32, x * 32 + 32, y * 32 + 32, 0xff0000);
+#endif
 					}
 
 					if (map[y][x * 3 + 2] == '8')
 					{
 						gun3.Draw(screen, x * 32, y * 32 + 6);
 						gun3.SetFrame(20);
+#ifdef _DEBUG
 						screen->Box(x * 32, y * 32, x * 32 + 32, y * 32 + 32, 0xff0000);
+#endif
 					}
 				}
 
 			//numbers printed
 			char msg1[256];
 			snprintf(msg1, 256, "Lives: %i", lives);
-			screen->Print(msg1, 35, 12, 0xffffff);
+			screen->PrintScaled(msg1, 35, 12, 2, 2, 0xffffff);
 
 			char msg2[256];
-			snprintf(msg2, 256, "Items collected: %i", collected);
-			screen->Print(msg2, 35, 22, 0xffffff);
+			snprintf(msg2, 256, "Items collected: %i/9", collected);
+			screen->PrintScaled(msg2, 525, 12, 2, 2, 0xffffff);
 
 			//draw stuff on screen
 
 			tanks[0].Draw(*screen);
+#ifdef _DEBUG
 			tanks[0].Box(*screen, 0xff00ff);
+#endif
 
 			for (int i = 1; i < 5; i++)
 			{
 				if (tanks[i].getActive())
 				{
 					tanks[i].Draw(*screen);
+#ifdef _DEBUG
 					tanks[i].Box(*screen, 0xff0000);
+#endif
 				}
 			}
 
@@ -319,7 +330,7 @@ namespace Tmpl8
 				show_gameover = true;
 			}
 
-			if (collected >= 8 && !show_gameover && !show_startscreen && !show_controls)
+			if (collected >= 9 && !show_gameover && !show_startscreen && !show_controls)
 			{
 				show_win = true;
 			}

@@ -1,13 +1,17 @@
 fix:
 
+
 add:
-- controls W, A, S, D
 - set the map in another file (map.cpp & map.h)
+- change the controls screen to an image with information
+- add sprite for the items (rotating coins)
+- make it clear that the enemy tank is an enemy tank
+- add readme.txt
 
 note:
-- maybe increase the amount of lives?
-- change the controls screen to an image with information?
+- Remove debug circles in release mode (using #ifdef preprocessor macros)?
 
 if there is time left (probably not (stupid exams)) add:
 - hearts in the game that the tank can collect to increase its amount of lives
-- option to keep playing after player collected 9 item or to go to the main menu
+- option to keep playing after player collected 8 items
+- add sound effects

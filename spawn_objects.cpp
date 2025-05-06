@@ -92,7 +92,7 @@ void spawn_objects::spawnObjects(Tmpl8::Game& objects, const int& collected, Tmp
     }
 
 
-    if (collected >= 7)
+    if (collected >= 8)
     {
         bullets[5].setActive(true);
     }

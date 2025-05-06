@@ -48,7 +48,7 @@ void startscreen::mouseClick(bool const clicked)
 		if (button_detected >= 0 && clicked && button_detected < button.size())
 		{
 			case_number = button_detected;
-			std::cout << case_number << std::endl;
+			//std::cout << case_number << std::endl;
 		}
 	}
 	else
@@ -60,7 +60,7 @@ void startscreen::mouseClick(bool const clicked)
 void startscreen::buttonCase(bool& show_startscreen, bool& show_game, bool& show_controls, bool& show_gameover, bool& show_win, 
 	int& lives, int& collected, bool& resetTankPos, bool const clicked) const
 {
-	std::cout << "Case number: " << case_number << std::endl;
+	//std::cout << "Case number: " << case_number << std::endl;
 	switch (case_number)
 	{
 	case 0: // controls
