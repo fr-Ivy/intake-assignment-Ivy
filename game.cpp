@@ -36,9 +36,9 @@ namespace Tmpl8
 
 	Surface tiles("assets/nc2tiles.png");
 	Sprite tank(new Surface ("assets/ctankbase.tga"), 16);
-	Sprite badTank1(new Surface("assets/ctankbase.tga"), 16);
-	Sprite badTank2(new Surface("assets/ctankbase.tga"), 16);
-	Sprite badTank3(new Surface("assets/ctankbase.tga"), 16);
+	Sprite badTank1(new Surface("assets/enemyTank.png"), 16);
+	Sprite badTank2(new Surface("assets/enemyTank.png"), 16);
+	Sprite badTank3(new Surface("assets/enemyTank.png"), 16);
 	Sprite gun1(new Surface("assets/minigun.tga"), 32);
 	Sprite gun2(new Surface("assets/minigun.tga"), 32);
 	Sprite gun3(new Surface("assets/minigun.tga"), 32);
