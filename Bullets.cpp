@@ -2,7 +2,7 @@
 #include "game.h"
 using namespace Tmpl8;
 
-Bullets::Bullets(float const x, float const y, float const r, float const speed, float const beginX, float const beginY, int const direction)
+Bullets::Bullets(float x, float y, float r, float speed, float beginX, float beginY, int direction)
 {
 	this->x = x;
 	this->y = y;
@@ -76,7 +76,7 @@ void Bullets::draw(Surface& surface) const
 {
     for (int i = 0; i < 64; i++)
     {
-        float r1 = (float)i * PI / 32, r2 = (float)(i + 1) * PI / 32;
+        float r1 = static_cast<float>(i) * PI / 32, r2 = static_cast<float>(i + 1) * PI / 32;
         surface.Line(x - r * sinf(r1), y - r * cosf(r1),
             x - r * sinf(r2), y - r * cosf(r2), 0xff0000);
 

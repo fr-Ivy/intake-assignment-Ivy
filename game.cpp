@@ -52,8 +52,8 @@ namespace Tmpl8
 	float Enemy3X = 11.0f * 32.0f, Enemy3Y = 10.0f * 32.0f;
 	float Enemy4X = 1.0f * 32.0f, Enemy4Y = 4.0f * 32.0f;
 	Item item[1];
-	int itemX = 45;
-	int itemY = 45;
+	float itemX = 45.0f;
+	float itemY = 45.0f;
 	float cooldown1 = 1000.0f;
 	float cooldown2 = 1000.0f;
 	float cooldown3 = 500.0f;
@@ -135,14 +135,14 @@ namespace Tmpl8
 	bool Game::CheckPos(float x, float y)
 	{
 		float tx = x / (32.0f), ty = y / (32.0f);
-		return map[(int)ty][(int)tx * 3 + 2] != 'X';
+		return map[static_cast<int>(ty)][static_cast<int>(tx) * 3 + 2] != 'X';
 	}
 
 	bool Game::CheckGun(float x, float y)
 	{
 		float tx = (x) / (32.0f), ty = (y) / (32.0f);
-		return map[(int)ty][(int)tx * 3 + 2] != '1' &&
-			map[(int)ty][(int)tx * 3 + 2] != '8';
+		return map[static_cast<int>(ty)][static_cast<int>(tx) * 3 + 2] != '1' &&
+			map[static_cast<int>(ty)][static_cast<int>(tx) * 3 + 2] != '8';
 	}
 
 	// -----------------------------------------------------------
@@ -151,7 +151,7 @@ namespace Tmpl8
 	void Game::Tick(float deltaTime)
 	{
 		start_screen.buttonCase(show_startscreen, show_game, show_controls, show_gameover, show_win, 
-			lives, collected, resetTankPos, clicked);
+			lives, collected, resetTankPos, clicked, enabled);
 
 		if (show_startscreen)
 		{
@@ -159,6 +159,7 @@ namespace Tmpl8
 			start_screen.drawButton(0, 3);
 			start_screen.detectMouse(mouseX, mouseY);
 			start_screen.detectButton(0, 3);
+			enabled = true;
 			start_screen.mouseClick(clicked);
 
 			screen->PrintScaled("PLAY", 375, 400, 2, 2, 0XFFFFFF);
@@ -186,6 +187,7 @@ namespace Tmpl8
 
 		if (show_game)
 		{
+			enabled = false;
 			screen->Clear(0);
 			//other stuff
 			cooldown1 -= deltaTime;
@@ -250,10 +252,10 @@ namespace Tmpl8
 					DrawTile(tx, ty, screen, x * 32, y * 32);
 				}
 
-			for (int y = 0; y < 16; y++)
-				for (int x = 0; x < 25; x++)
+			for (float y = 0; y < 16; y++)
+				for (float x = 0; x < 25; x++)
 				{
-					if (map[y][x * 3 + 2] == '1')
+					if (map[static_cast<int>(y)][static_cast<int>(x) * 3 + 2] == '1')
 					{
 						gun1.Draw(screen, x * 32 + 2, y * 32 + 10);
 						gun1.SetFrame(0);
@@ -263,16 +265,7 @@ namespace Tmpl8
 #endif
 					}
 
-					if (map[y][x * 3 + 2] == '5')
-					{
-						gun2.Draw(screen, x * 32 - 2, y * 32 + 7);
-						gun2.SetFrame(4);
-#ifdef _DEBUG
-						screen->Box(x * 32, y * 32, x * 32 + 32, y * 32 + 32, 0xff0000);
-#endif
-					}
-
-					if (map[y][x * 3 + 2] == '8')
+					if (map[static_cast<int>(y)][static_cast<int>(x) * 3 + 2] == '8')
 					{
 						gun3.Draw(screen, x * 32, y * 32 + 6);
 						gun3.SetFrame(20);
@@ -343,6 +336,7 @@ namespace Tmpl8
 			start_screen.detectMouse(mouseX, mouseY);
 			start_screen.detectButton(6, 8);
 			start_screen.mouseClick(clicked);
+			enabled = true;
 			mouse.Draw(screen, mouseX - 12, mouseY - 12);
 
 			screen->PrintScaled("RETRY", 225, 325, 2, 2, 0XFFFFFF);
@@ -357,6 +351,7 @@ namespace Tmpl8
 			start_screen.detectMouse(mouseX, mouseY);
 			start_screen.detectButton(4, 6);
 			start_screen.mouseClick(clicked);
+			enabled = true;
 			mouse.Draw(screen, mouseX - 12, mouseY - 12);
 
 			screen->PrintScaled("RETRY", 225, 325, 2, 2, 0XFFFFFF);

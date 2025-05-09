@@ -20,7 +20,9 @@
     <ClCompile Include="startscreen.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="spawn_objects.cpp" />
+    <ClCompile Include="spawn_objects.cpp">
+      <Filter>obstacles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
@@ -42,7 +44,9 @@
     <ClInclude Include="startscreen.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="spawn_objects.h" />
+    <ClInclude Include="spawn_objects.h">
+      <Filter>obstacles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">

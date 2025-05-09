@@ -9,7 +9,7 @@
 
 using namespace Tmpl8;
 
-Tank::Tank(float const posX, float const posY, int const frame, Tmpl8::Sprite* sprite, int const behaviour)
+Tank::Tank(float posX, float posY, int frame, Tmpl8::Sprite* sprite, int behaviour)
 {
     this->posX = posX;
     this->posY = posY;
@@ -20,13 +20,13 @@ Tank::Tank(float const posX, float const posY, int const frame, Tmpl8::Sprite* s
     this->beginY = posY;
 }
 
-void Tank::setPosition(float const posX, float const posY)
+void Tank::setPosition(float posX, float posY)
 {
     this->posX = posX;
     this->posY = posY;
 }
 
-void Tank::setFrame(int const frame)
+void Tank::setFrame(int frame)
 {
     this->frame = frame;
 }
@@ -46,7 +46,7 @@ float a = 0;
 float s = 0;
 float d = 0;
 
-void Tank::KeyUp(int key)
+void Tank::keyUp(int key)
 {
     switch (key)
     {
@@ -69,7 +69,7 @@ void Tank::KeyUp(int key)
     }
 }
 
-void Tank::KeyDown(int key)
+void Tank::keyDown(int key)
 {
     switch (key)
     {
@@ -97,7 +97,7 @@ void Tank::move(float deltaTime, bool& resetTankPos)
     deltaTime /= 1000.0f;
     if (behaviour == 0)
     {
-        float const moveSpeed = 200.0f;
+        float moveSpeed = 200.0f;
         float nx = posX;
         float ny = posY;
 
@@ -173,7 +173,7 @@ void Tank::move(float deltaTime, bool& resetTankPos)
     }
 }
 
-void Tank::Box(const Tmpl8::Surface& surface, Tmpl8::Pixel const color) const
+void Tank::Box(const Tmpl8::Surface& surface, Tmpl8::Pixel color) const
 {
     surface.Box(posX, posY, posX + 32, posY + 32, color);
 }
@@ -203,10 +203,10 @@ bool Tank::itemCollision(const Item& item) const
 bool Tank::bulletCollision(const Bullets& bullets) const
 {
 
-    if (posX - bullets.get_r() <= bullets.getX() &&
-        posY - bullets.get_r() <= bullets.getY() &&
-        posX + 32 + bullets.get_r() >= bullets.getX() &&
-        posY + 32 + bullets.get_r() >= bullets.getY())
+    if (posX - bullets.getR() <= bullets.getX() &&
+        posY - bullets.getR() <= bullets.getY() &&
+        posX + 32 + bullets.getR() >= bullets.getX() &&
+        posY + 32 + bullets.getR() >= bullets.getY())
     {
         //std::cout << "a Bullet! ouch!" << std::endl;
         return true;

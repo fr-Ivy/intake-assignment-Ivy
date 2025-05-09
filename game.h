@@ -34,8 +34,8 @@ public:
 		mouseX += x; mouseY += y; 
 
 	}
-	void KeyUp(int key) { tanks[0].KeyUp(key); }
-	void KeyDown(int key) { tanks[0].KeyDown(key); }
+	void KeyUp(int key) { tanks[0].keyUp(key); }
+	void KeyDown(int key) { tanks[0].keyDown(key); }
 	static bool CheckPos(float x, float y);
 	static bool CheckGun(float x, float y);
 	void drawGun();
@@ -54,13 +54,15 @@ private:
 	bool show_win = false;
 	bool resetTankPos = false;
 
-	int mouseX = 0;
-	int mouseY = 0;
+	float mouseX = 0.0f;
+	float mouseY = 0.0f;
 	bool clicked = false;
+	bool enabled = false;
 
 	Tank tanks[6];
 	//Tank tank;
 	Bullets bullets[6];
+
 
 	bool tank1 = false;
 	bool tank2 = false;

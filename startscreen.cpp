@@ -5,7 +5,7 @@ startscreen::startscreen(Tmpl8::Surface* surface, std::vector<buttons> button) :
 {
 }
 
-void startscreen::drawButton(int const start, int const end) const
+void startscreen::drawButton(int start, int end) const
 {
 	for (int i = start; i < end; i++)
 	{
@@ -13,14 +13,14 @@ void startscreen::drawButton(int const start, int const end) const
 	}
 }
 
-void startscreen::detectMouse(int mouse_x, int mouse_y)
+void startscreen::detectMouse(float mouse_x, float mouse_y)
 {
 	this->mouse_x = mouse_x;
 	this->mouse_y = mouse_y;
 	//std::cout << mouse_x << ", " << mouse_y << std::endl;
 }
 
-void startscreen::detectButton(int const start, int const end) //which buttons should it detect
+void startscreen::detectButton(int start, int end) //which buttons should it detect
 {
 	for (int i = start; i < end; i++)
 	{
@@ -41,7 +41,7 @@ void startscreen::detectButton(int const start, int const end) //which buttons s
 
 }
 
-void startscreen::mouseClick(bool const clicked)
+void startscreen::mouseClick(bool clicked)
 {
 	if (clicked)
 	{
@@ -58,7 +58,7 @@ void startscreen::mouseClick(bool const clicked)
 }
 
 void startscreen::buttonCase(bool& show_startscreen, bool& show_game, bool& show_controls, bool& show_gameover, bool& show_win, 
-	int& lives, int& collected, bool& resetTankPos, bool const clicked) const
+	int& lives, int& collected, bool& resetTankPos, bool clicked, bool enabled) const
 {
 	//std::cout << "Case number: " << case_number << std::endl;
 	switch (case_number)
@@ -74,7 +74,7 @@ void startscreen::buttonCase(bool& show_startscreen, bool& show_game, bool& show
 		show_gameover = false;
 		std::cout << "Play button pressed" << std::endl;
 
-		if (clicked)
+		if (clicked && enabled)
 		{
 			resetTankPos = true;
 
@@ -85,7 +85,6 @@ void startscreen::buttonCase(bool& show_startscreen, bool& show_game, bool& show
 		break;
 	case 2: // exit
 		exit(0);
-		std::cout << "Exit button pressed" << std::endl;
 		break;
 	case 3:
 		std::cout << "Back button pressed" << std::endl;
@@ -97,7 +96,7 @@ void startscreen::buttonCase(bool& show_startscreen, bool& show_game, bool& show
 		show_gameover = false;
 		std::cout << "retry button pressed" << std::endl;
 
-		if (clicked)
+		if (clicked && enabled)
 		{
 			resetTankPos = true;
 
@@ -116,7 +115,7 @@ void startscreen::buttonCase(bool& show_startscreen, bool& show_game, bool& show
 		show_win = false;
 		std::cout << "retry button pressed" << std::endl;
 
-		if (clicked)
+		if (clicked && enabled)
 		{
 			resetTankPos = true;
 

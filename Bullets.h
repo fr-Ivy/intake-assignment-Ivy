@@ -7,16 +7,15 @@ class Bullets
 {
 public:
 	Bullets() = default;
-	Bullets(float const x, float const y, float const r, float const speed, float const beginX, float const beginY, int const direction);
+	Bullets(float x, float y, float r, float speed, float beginX, float beginY, int direction);
 	~Bullets() = default;
 	void move(float deltaTime);
 	void draw(Tmpl8::Surface& surface) const;
 
 	int getX() const { return x; }
 	int getY() const { return y; }
-	int get_r() const { return r; }
+	int getR() const { return r; }
 
-	bool isActive = false;
 	void setActive(bool active) { isActive = active; }
 	bool getActive() const { return isActive; }
 
@@ -30,5 +29,6 @@ private:
 	float beginY = 0;
 	float speed = 0.0f;
 	int direction = 1;
+	bool isActive = false;
 };
 

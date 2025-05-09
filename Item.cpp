@@ -22,8 +22,8 @@ void Item::move()
 
     do
     {
-        nx = IRand(ScreenWidth);
-        ny = IRand(ScreenHeight);
+        nx = static_cast<float>(IRand(ScreenWidth));
+        ny = static_cast<float>(IRand(ScreenHeight));
 
     } while (!Game::CheckPos(nx, ny) ||
         !Game::CheckPos(nx + 15.0f, ny + 15.0f) ||

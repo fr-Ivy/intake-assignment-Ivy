@@ -62,7 +62,7 @@ public:
 	void CopyTo( Surface* a_Dst, int a_X, int a_Y );
 	void BlendCopyTo( Surface* a_Dst, int a_X, int a_Y );
 	void ScaleColor( unsigned int a_Scale );
-	void Box( int x1, int y1, int x2, int y2, Pixel color ) const;
+	void Box( float x1, float y1, float x2, float y2, Pixel color ) const;
 	void Bar( int x1, int y1, int x2, int y2, Pixel color );
 	void Resize( Surface* a_Orig );
 	void Surface::PrintScaled(char* a_String, int x1, int y1, int xscale, int yscale, Pixel color);
@@ -100,7 +100,7 @@ public:
 	Sprite( Surface* a_Surface, unsigned int a_NumFrames );
 	~Sprite();
 	// Methods
-	void Draw( Surface* a_Target, int a_X, int a_Y );
+	void Draw( Surface* a_Target, float a_X, float a_Y );
 	void DrawScaled( int a_X, int a_Y, int a_Width, int a_Height, Surface* a_Target );
 	void SetFlags( unsigned int a_Flags ) { m_Flags = a_Flags; }
 	void SetFrame( unsigned int a_Index ) { m_CurrentFrame = a_Index; }
