@@ -7,7 +7,7 @@
 #include "spawn_objects.h"
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h> //controls
-#include "startscreen.h"
+#include "UI.h"
 #include <vector>
 #include <iostream>
 
@@ -44,6 +44,7 @@ namespace Tmpl8
 	Sprite gun3(new Surface("assets/minigun.tga"), 32);
 	Sprite bullet(new Surface("assets/phaser.tga"), 16);
 	Sprite mouse(new Surface("assets/target.tga"), 1);
+	Sprite coin(new Surface("assets/coin4.png"), 1);
 
 
 	float TankX = 23.0f * 32.0f, TankY = 14.0f * 32.0f;
@@ -59,7 +60,7 @@ namespace Tmpl8
 	float cooldown3 = 500.0f;
 	float Seconds = 0.0f;
 
-	startscreen start_screen;
+	UI ui;
 	spawn_objects spawn;
 
 	void Game::Init()
@@ -76,7 +77,7 @@ namespace Tmpl8
 				{450, 300, 200, 60}
 			};
 
-		start_screen = startscreen(screen, button);
+		ui = UI(screen, button);
 
 		tanks[0] = Tank(TankX, TankY, 8, &tank, 0);
 		tanks[1] = Tank(Enemy1X, Enemy1Y, 8, &badTank1, 1);
@@ -86,7 +87,7 @@ namespace Tmpl8
 
 
 
-		item[0] = Item(itemX, itemY);
+		item[0] = Item(itemX, itemY, &coin);
 
 		for (Item& items : item)
 		{
@@ -121,7 +122,7 @@ namespace Tmpl8
 	}
 
 
-
+	//map stuff
 	void DrawTile(int const tx, int const ty, Surface* screen, int const x, int const y)
 	{
 		Pixel* src = tiles.GetBuffer() + 1 + tx * 33 + (1 + ty * 33) * 595;
@@ -150,17 +151,17 @@ namespace Tmpl8
 	// -----------------------------------------------------------
 	void Game::Tick(float deltaTime)
 	{
-		start_screen.buttonCase(show_startscreen, show_game, show_controls, show_gameover, show_win, 
+		ui.buttonCase(show_startscreen, show_game, show_controls, show_gameover, show_win, 
 			lives, collected, resetTankPos, clicked, enabled);
 
 		if (show_startscreen)
 		{
 			screen->Clear(0);
-			start_screen.drawButton(0, 3);
-			start_screen.detectMouse(mouseX, mouseY);
-			start_screen.detectButton(0, 3);
+			ui.drawButton(0, 3);
+			ui.detectMouse(mouseX, mouseY);
+			ui.detectButton(0, 3);
 			enabled = true;
-			start_screen.mouseClick(clicked);
+			ui.mouseClick(clicked);
 
 			screen->PrintScaled("PLAY", 375, 400, 2, 2, 0XFFFFFF);
 			screen->PrintScaled("CONTROLS", 100, 400, 2, 2, 0xffffff);
@@ -172,10 +173,10 @@ namespace Tmpl8
 		if (show_controls)
 		{
 			screen->Clear(0);
-			start_screen.drawButton(3, 4);
-			start_screen.detectMouse(mouseX, mouseY);
-			start_screen.detectButton(3, 4);
-			start_screen.mouseClick(clicked);
+			ui.drawButton(3, 4);
+			ui.detectMouse(mouseX, mouseY);
+			ui.detectButton(3, 4);
+			ui.mouseClick(clicked);
 
 			screen->PrintScaled("BACK", 700, 45, 3, 3, 0XFFFFFF);
 			screen->PrintScaled("ARROW KEY UP/W - UP", 50, 120, 2, 2, 0XFFFFFF);
@@ -188,7 +189,6 @@ namespace Tmpl8
 		if (show_game)
 		{
 			enabled = false;
-			screen->Clear(0);
 			//other stuff
 			cooldown1 -= deltaTime;
 			cooldown2 -= deltaTime;
@@ -203,7 +203,7 @@ namespace Tmpl8
 			{
 				bullet.move(deltaTime);
 			}
-
+			
 
 			//collisions
 			for (int i = 1; i <= 5; i++)
@@ -305,6 +305,9 @@ namespace Tmpl8
 			for (Item& items : item)
 			{
 				items.draw(*screen);
+#ifdef _DEBUG
+				items.Box(*screen, 0xffffff);
+#endif
 			}
 
 			Seconds += deltaTime;
@@ -332,10 +335,10 @@ namespace Tmpl8
 		if (show_win)
 		{
 			screen->Clear(0);
-			start_screen.drawButton(6, 8);
-			start_screen.detectMouse(mouseX, mouseY);
-			start_screen.detectButton(6, 8);
-			start_screen.mouseClick(clicked);
+			ui.drawButton(6, 8);
+			ui.detectMouse(mouseX, mouseY);
+			ui.detectButton(6, 8);
+			ui.mouseClick(clicked);
 			enabled = true;
 			mouse.Draw(screen, mouseX - 12, mouseY - 12);
 
@@ -347,10 +350,10 @@ namespace Tmpl8
 		if (show_gameover)
 		{
 			screen->Clear(0);
-			start_screen.drawButton(4, 6);
-			start_screen.detectMouse(mouseX, mouseY);
-			start_screen.detectButton(4, 6);
-			start_screen.mouseClick(clicked);
+			ui.drawButton(4, 6);
+			ui.detectMouse(mouseX, mouseY);
+			ui.detectButton(4, 6);
+			ui.mouseClick(clicked);
 			enabled = true;
 			mouse.Draw(screen, mouseX - 12, mouseY - 12);
 

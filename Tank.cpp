@@ -192,7 +192,7 @@ bool Tank::collision(const Tank& other) const
 bool Tank::itemCollision(const Item& item) const
 {
 
-    if (posX <= item.getX() + 15 && posY <= item.getY() + 15 && posX + 32 >= item.getX() && posY + 32 >= item.getY())
+    if (posX <= item.getX() + 25 && posY <= item.getY() + 25 && posX + 32 >= item.getX() && posY + 32 >= item.getY())
     {
         //std::cout << "Item, YAYYYY!" << std::endl;
         return true;

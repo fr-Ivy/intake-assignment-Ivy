@@ -1,11 +1,11 @@
-#include "startscreen.h"
+#include "UI.h"
 #include <iostream>
 
-startscreen::startscreen(Tmpl8::Surface* surface, std::vector<buttons> button) : surface(surface), button(button), case_number(-1), button_detected(-1)
+UI::UI(Tmpl8::Surface* surface, std::vector<buttons> button) : surface(surface), button(button), case_number(-1), button_detected(-1)
 {
 }
 
-void startscreen::drawButton(int start, int end) const
+void UI::drawButton(int start, int end) const
 {
 	for (int i = start; i < end; i++)
 	{
@@ -13,14 +13,14 @@ void startscreen::drawButton(int start, int end) const
 	}
 }
 
-void startscreen::detectMouse(float mouse_x, float mouse_y)
+void UI::detectMouse(float mouse_x, float mouse_y)
 {
 	this->mouse_x = mouse_x;
 	this->mouse_y = mouse_y;
 	//std::cout << mouse_x << ", " << mouse_y << std::endl;
 }
 
-void startscreen::detectButton(int start, int end) //which buttons should it detect
+void UI::detectButton(int start, int end) //which buttons should it detect
 {
 	for (int i = start; i < end; i++)
 	{
@@ -41,7 +41,7 @@ void startscreen::detectButton(int start, int end) //which buttons should it det
 
 }
 
-void startscreen::mouseClick(bool clicked)
+void UI::mouseClick(bool clicked)
 {
 	if (clicked)
 	{
@@ -57,7 +57,7 @@ void startscreen::mouseClick(bool clicked)
 	}
 }
 
-void startscreen::buttonCase(bool& show_startscreen, bool& show_game, bool& show_controls, bool& show_gameover, bool& show_win, 
+void UI::buttonCase(bool& show_startscreen, bool& show_game, bool& show_controls, bool& show_gameover, bool& show_win, 
 	int& lives, int& collected, bool& resetTankPos, bool clicked, bool enabled) const
 {
 	//std::cout << "Case number: " << case_number << std::endl;

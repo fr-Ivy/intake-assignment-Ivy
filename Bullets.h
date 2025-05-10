@@ -10,11 +10,11 @@ public:
 	Bullets(float x, float y, float r, float speed, float beginX, float beginY, int direction);
 	~Bullets() = default;
 	void move(float deltaTime);
-	void draw(Tmpl8::Surface& surface) const;
+	void draw(const Tmpl8::Surface& surface) const;
 
-	int getX() const { return x; }
-	int getY() const { return y; }
-	int getR() const { return r; }
+	float getX() const { return x; }
+	float getY() const { return y; }
+	float getR() const { return r; }
 
 	void setActive(bool active) { isActive = active; }
 	bool getActive() const { return isActive; }

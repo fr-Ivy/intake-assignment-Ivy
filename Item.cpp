@@ -3,13 +3,14 @@
 
 using namespace Tmpl8;
 
-Item::Item(float const x, float const y)
+Item::Item(float const x, float const y, Tmpl8::Sprite* sprite)
 {
 	this->x = x;
 	this->y = y;
+    this->sprite = sprite;
 }
 
-void Item::setPosition(float const x, float const y)
+void Item::setPosition(float x, float y)
 {
 	this->x = x;
 	this->y = y;
@@ -26,9 +27,9 @@ void Item::move()
         ny = static_cast<float>(IRand(ScreenHeight));
 
     } while (!Game::CheckPos(nx, ny) ||
-        !Game::CheckPos(nx + 15.0f, ny + 15.0f) ||
-        !Game::CheckPos(nx + 15.0f, ny) ||
-        !Game::CheckPos(nx, ny + 15.0f));
+        !Game::CheckPos(nx + 25.0f, ny + 25.0f) ||
+        !Game::CheckPos(nx + 25.0f, ny) ||
+        !Game::CheckPos(nx, ny + 25.0f));
 
     x = nx;
     y = ny;
@@ -37,5 +38,13 @@ void Item::move()
 
 void Item::draw(Tmpl8::Surface& surface) const
 {
-	surface.Box(x, y, x + 15, y + 15, 0x204299);
+    if (sprite)
+    {
+        sprite->Draw(&surface, x, y);
+    }
+}
+
+void Item::Box(const Tmpl8::Surface& surface, Tmpl8::Pixel color) const
+{
+    surface.Box(x, y, x + 25, y + 25, color);
 }

@@ -7,12 +7,12 @@ struct buttons
 	float x, y, x2, y2;
 };
 
-class startscreen
+class UI
 {
 public:
-	startscreen() = default;
-	startscreen(Tmpl8::Surface* surface, std::vector<buttons> button);
-	~startscreen() = default;
+	UI() = default;
+	UI(Tmpl8::Surface* surface, std::vector<buttons> button);
+	~UI() = default;
 	void drawButton(int start, int end) const;
 	void detectMouse(float mouse_x, float mouse_y);
 	void detectButton(int start, int end);

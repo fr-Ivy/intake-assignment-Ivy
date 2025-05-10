@@ -17,7 +17,7 @@
     <ClCompile Include="Bullets.cpp">
       <Filter>Guns</Filter>
     </ClCompile>
-    <ClCompile Include="startscreen.cpp">
+    <ClCompile Include="UI.cpp">
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="spawn_objects.cpp">
@@ -41,7 +41,7 @@
     <ClInclude Include="Bullets.h">
       <Filter>Guns</Filter>
     </ClInclude>
-    <ClInclude Include="startscreen.h">
+    <ClInclude Include="UI.h">
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="spawn_objects.h">
