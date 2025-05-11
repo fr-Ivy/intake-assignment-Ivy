@@ -60,7 +60,6 @@ private:
 	bool enabled = false;
 
 	Tank tanks[6];
-	//Tank tank;
 	Bullets bullets[6];
 
 

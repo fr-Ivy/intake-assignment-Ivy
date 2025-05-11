@@ -2,8 +2,6 @@
 #include "surface.h"
 #include <cstdio> //printf
 #include "Item.h"
-#include "Gun.h"
-#include "Bullets.h"
 #include "spawn_objects.h"
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h> //controls
@@ -14,6 +12,7 @@
 
 namespace Tmpl8
 {
+	//map
 	static char map[16][76] =
 	{
 		"aaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXcaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXbaXda8",
@@ -34,6 +33,7 @@ namespace Tmpl8
 		"acXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXcdXddX"
 	};
 
+	//assets
 	Surface tiles("assets/nc2tiles.png");
 	Surface instructions("assets/Instructions.png");
 	Sprite tank(new Surface ("assets/ctankbase.tga"), 16);
@@ -47,13 +47,12 @@ namespace Tmpl8
 	Sprite mouse(new Surface("assets/target.tga"), 1);
 	Sprite coin(new Surface("assets/coin.png"), 1);
 
-
+	//positions
 	float TankX = 23.0f * 32.0f, TankY = 14.0f * 32.0f;
 	float Enemy1X = 20.0f * 32.0f, Enemy1Y = 10.0f * 32.0f;
 	float Enemy2X = 12.0f * 32.0f, Enemy2Y = 1.0f * 32.0f;
 	float Enemy3X = 11.0f * 32.0f, Enemy3Y = 10.0f * 32.0f;
 	float Enemy4X = 1.0f * 32.0f, Enemy4Y = 4.0f * 32.0f;
-	Item item[1];
 	float itemX = 45.0f;
 	float itemY = 45.0f;
 	float cooldown1 = 1000.0f;
@@ -61,6 +60,7 @@ namespace Tmpl8
 	float cooldown3 = 500.0f;
 	float Seconds = 0.0f;
 
+	Item item[1];
 	UI ui;
 	spawn_objects spawn;
 
@@ -105,7 +105,6 @@ namespace Tmpl8
 		//combination down and right = 7
 		//combination down and left = 8
 
-		
 		bullets[0] = Bullets(6 * 32 + 14, 14 * 32 + 7, 5, 240.0f, 6 * 32 + 14, 14 * 32 + 7, 1);
 		bullets[1] = Bullets(6 * 32 + 14, 13 * 32 + 7, 5, 240.0f, 6 * 32 + 14, 14 * 32 + 7, 1);
 		bullets[2] = Bullets(14 * 32 + 14, 12 * 32 + 7, 5, 200.0f, 14 * 32 + 14, 12 * 32 + 7, 1);
@@ -136,13 +135,13 @@ namespace Tmpl8
 	
 	bool Game::CheckPos(float x, float y)
 	{
-		float tx = x / (32.0f), ty = y / (32.0f);
+		float tx = x / 32.0f, ty = y / 32.0f;
 		return map[static_cast<int>(ty)][static_cast<int>(tx) * 3 + 2] != 'X';
 	}
 
 	bool Game::CheckGun(float x, float y)
 	{
-		float tx = (x) / (32.0f), ty = (y) / (32.0f);
+		float tx = x / 32.0f, ty = y / 32.0f;
 		return map[static_cast<int>(ty)][static_cast<int>(tx) * 3 + 2] != '1' &&
 			map[static_cast<int>(ty)][static_cast<int>(tx) * 3 + 2] != '8';
 	}
