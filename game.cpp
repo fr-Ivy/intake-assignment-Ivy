@@ -35,6 +35,7 @@ namespace Tmpl8
 	};
 
 	Surface tiles("assets/nc2tiles.png");
+	Surface instructions("assets/Instructions.png");
 	Sprite tank(new Surface ("assets/ctankbase.tga"), 16);
 	Sprite badTank1(new Surface("assets/enemyTank.png"), 16);
 	Sprite badTank2(new Surface("assets/enemyTank.png"), 16);
@@ -44,7 +45,7 @@ namespace Tmpl8
 	Sprite gun3(new Surface("assets/minigun.tga"), 32);
 	Sprite bullet(new Surface("assets/phaser.tga"), 16);
 	Sprite mouse(new Surface("assets/target.tga"), 1);
-	Sprite coin(new Surface("assets/coin4.png"), 1);
+	Sprite coin(new Surface("assets/coin.png"), 1);
 
 
 	float TankX = 23.0f * 32.0f, TankY = 14.0f * 32.0f;
@@ -172,17 +173,13 @@ namespace Tmpl8
 
 		if (show_controls)
 		{
-			screen->Clear(0);
+			instructions.CopyTo(screen, 0, 0);
 			ui.drawButton(3, 4);
 			ui.detectMouse(mouseX, mouseY);
 			ui.detectButton(3, 4);
 			ui.mouseClick(clicked);
 
-			screen->PrintScaled("BACK", 700, 45, 3, 3, 0XFFFFFF);
-			screen->PrintScaled("ARROW KEY UP/W - UP", 50, 120, 2, 2, 0XFFFFFF);
-			screen->PrintScaled("ARROW KEY LEFT/A - LEFT", 50, 150, 2, 2, 0XFFFFFF);
-			screen->PrintScaled("ARROW KEY DOWN/S - DOWN", 50, 180, 2, 2, 0XFFFFFF);
-			screen->PrintScaled("ARROW KEY RIGHT/D - RIGHT", 50, 210, 2, 2, 0XFFFFFF);
+			screen->PrintScaled("BACK", 700, 45, 3, 3, 0Xffffff);
 			mouse.Draw(screen, mouseX - 12, mouseY - 12);
 		} 
 
@@ -281,7 +278,7 @@ namespace Tmpl8
 			screen->PrintScaled(msg1, 35, 12, 2, 2, 0xffffff);
 
 			char msg2[256];
-			snprintf(msg2, 256, "Items collected: %i/9", collected);
+			snprintf(msg2, 256, "Coins collected: %i/9", collected);
 			screen->PrintScaled(msg2, 525, 12, 2, 2, 0xffffff);
 
 			//draw stuff on screen
