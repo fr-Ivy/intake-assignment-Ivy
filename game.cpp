@@ -48,11 +48,11 @@ namespace Tmpl8
 	Sprite coin(new Surface("assets/coin.png"), 1);
 
 	//positions
-	float TankX = 23.0f * 32.0f, TankY = 14.0f * 32.0f;
-	float Enemy1X = 20.0f * 32.0f, Enemy1Y = 10.0f * 32.0f;
-	float Enemy2X = 12.0f * 32.0f, Enemy2Y = 1.0f * 32.0f;
-	float Enemy3X = 11.0f * 32.0f, Enemy3Y = 10.0f * 32.0f;
-	float Enemy4X = 1.0f * 32.0f, Enemy4Y = 4.0f * 32.0f;
+	float tankX = 23.0f * 32.0f, tankY = 14.0f * 32.0f;
+	float enemy1X = 20.0f * 32.0f, enemy1Y = 10.0f * 32.0f;
+	float enemy2X = 12.0f * 32.0f, enemy2Y = 1.0f * 32.0f;
+	float enemy3X = 11.0f * 32.0f, enemy3Y = 10.0f * 32.0f;
+	float enemy4X = 1.0f * 32.0f, enemy4Y = 4.0f * 32.0f;
 	float itemX = 45.0f;
 	float itemY = 45.0f;
 	float cooldown1 = 1000.0f;
@@ -80,11 +80,11 @@ namespace Tmpl8
 
 		ui = UI(screen, button);
 
-		tanks[0] = Tank(TankX, TankY, 8, &tank, 0);
-		tanks[1] = Tank(Enemy1X, Enemy1Y, 8, &badTank1, 1);
-		tanks[2] = Tank(Enemy2X, Enemy2Y, 0, &badTank2, 3);
-		tanks[3] = Tank(Enemy3X, Enemy3Y, 0, &badTank2, 1);
-		tanks[4] = Tank(Enemy4X, Enemy4Y, 12, &badTank3, 2);
+		tanks[0] = Tank(tankX, tankY, 8, &tank, 0);
+		tanks[1] = Tank(enemy1X, enemy1Y, 8, &badTank1, 1);
+		tanks[2] = Tank(enemy2X, enemy2Y, 0, &badTank2, 3);
+		tanks[3] = Tank(enemy3X, enemy3Y, 0, &badTank2, 1);
+		tanks[4] = Tank(enemy4X, enemy4Y, 12, &badTank3, 2);
 
 
 
@@ -125,25 +125,25 @@ namespace Tmpl8
 	//map stuff
 	void DrawTile(int const tx, int const ty, Surface* screen, int const x, int const y)
 	{
-		Pixel* src = tiles.GetBuffer() + 1 + tx * 33 + (1 + ty * 33) * 595;
-		Pixel* dst = screen->GetBuffer() + x + y * 800;
+		Pixel* src = tiles.GetBuffer() + 1 + tx * 33 + (1 + ty * 33) * 595; //gets each tile
+		Pixel* dst = screen->GetBuffer() + x + y * 800; //gets the screen
 
 		for (int i = 0; i < 32; i++, src += 595, dst += 800)
-			for (int j = 0; j < 32; j++)
-				dst[j] = src[j];
+			for (int j = 0; j < 32; j++) //loop through every pixel
+				dst[j] = src[j]; //prints the tile on the screen
 	}
 	
 	bool Game::CheckPos(float x, float y)
 	{
-		float tx = x / 32.0f, ty = y / 32.0f;
-		return map[static_cast<int>(ty)][static_cast<int>(tx) * 3 + 2] != 'X';
+		float tx = x / 32.0f, ty = y / 32.0f; //gets the tile
+		return map[static_cast<int>(ty)][static_cast<int>(tx) * 3 + 2] != 'X'; //returns position if not equal to X
 	}
 
 	bool Game::CheckGun(float x, float y)
 	{
-		float tx = x / 32.0f, ty = y / 32.0f;
-		return map[static_cast<int>(ty)][static_cast<int>(tx) * 3 + 2] != '1' &&
-			map[static_cast<int>(ty)][static_cast<int>(tx) * 3 + 2] != '8';
+		float tx = x / 32.0f, ty = y / 32.0f; //gets the tile
+		return map[static_cast<int>(ty)][static_cast<int>(tx) * 3 + 2] != '1' && //returns position if not equal to 1
+			map[static_cast<int>(ty)][static_cast<int>(tx) * 3 + 2] != '8'; //return position if not equal to 8
 	}
 
 	// -----------------------------------------------------------
@@ -160,8 +160,8 @@ namespace Tmpl8
 			ui.drawButton(0, 3);
 			ui.detectMouse(mouseX, mouseY);
 			ui.detectButton(0, 3);
-			enabled = true;
 			ui.mouseClick(clicked);
+			enabled = true;
 
 			screen->PrintScaled("PLAY", 375, 400, 2, 2, 0XFFFFFF);
 			screen->PrintScaled("CONTROLS", 100, 400, 2, 2, 0xffffff);
@@ -242,10 +242,10 @@ namespace Tmpl8
 			//draw map
 			screen->Clear(0);
 			for (int y = 0; y < 16; y++)
-				for (int x = 0; x < 25; x++)
+				for (int x = 0; x < 25; x++) //loops through every tile
 				{
-					int tx = map[y][x * 3] - 'a', ty = map[y][x * 3 + 1] - 'a';
-					DrawTile(tx, ty, screen, x * 32, y * 32);
+					int tx = map[y][x * 3] - 'a', ty = map[y][x * 3 + 1] - 'a'; //gets the correct tile
+					DrawTile(tx, ty, screen, x * 32, y * 32); //draws the tile on the screen
 				}
 
 			for (float y = 0; y < 16; y++)
@@ -253,17 +253,16 @@ namespace Tmpl8
 				{
 					if (map[static_cast<int>(y)][static_cast<int>(x) * 3 + 2] == '1')
 					{
-						gun1.Draw(screen, x * 32 + 2, y * 32 + 10);
+						gun1.Draw(screen, x * 32 + 2, y * 32 + 10); //draw gun at correct position
 						gun1.SetFrame(0);
 #ifdef _DEBUG
-
 						screen->Box(x * 32, y * 32, x * 32 + 32, y * 32 + 32, 0xff0000);
 #endif
 					}
 
 					if (map[static_cast<int>(y)][static_cast<int>(x) * 3 + 2] == '8')
 					{
-						gun3.Draw(screen, x * 32, y * 32 + 6);
+						gun3.Draw(screen, x * 32, y * 32 + 6); //draw gun at correct position
 						gun3.SetFrame(20);
 #ifdef _DEBUG
 						screen->Box(x * 32, y * 32, x * 32 + 32, y * 32 + 32, 0xff0000);
