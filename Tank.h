@@ -26,6 +26,9 @@ public:
 	void setActive(bool active) { isActive = active; }
 	bool getActive() const { return isActive; }
 
+	float getX() { return posX; }
+	float getY() { return posY; }
+
 private:
 	float posX = 0.0f;
 	float posY = 0.0f;

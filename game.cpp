@@ -58,6 +58,7 @@ namespace Tmpl8
 	float cooldown1 = 1000.0f;
 	float cooldown2 = 1000.0f;
 	float cooldown3 = 500.0f;
+	float cooldown4 = 0.0f;
 	float Seconds = 0.0f;
 
 	Item item[1];
@@ -184,6 +185,7 @@ namespace Tmpl8
 			cooldown1 -= deltaTime;
 			cooldown2 -= deltaTime;
 			cooldown3 -= deltaTime;
+			cooldown4 -= deltaTime;
 
 			for (Tank& tank : tanks)
 			{
@@ -205,6 +207,7 @@ namespace Tmpl8
 					{
 						lives--;
 						cooldown1 = 1000.0f;
+						cooldown4 = 500.0f;
 					}
 				}
 			}
@@ -230,9 +233,11 @@ namespace Tmpl8
 					{
 						lives--;
 						cooldown3 = 500.0f;
+						cooldown4 = 500.0f;
 					}
 				}
 			}
+
 
 			//draw map
 			screen->Clear(0);
@@ -308,6 +313,13 @@ namespace Tmpl8
 					bullets[i].draw(*screen);
 				}
 			}
+
+			// Decrement cooldown4 every frame
+			if (cooldown4 > 0.0f)
+			{
+				screen->PrintScaled("OUCH!", tanks[0].getX() + 25, tanks[0].getY(), 3, 3, 0xffffff);
+			}
+
 
 			spawn.spawnObjects(*this, collected, *screen);
 
