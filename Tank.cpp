@@ -20,12 +20,6 @@ Tank::Tank(float posX, float posY, int frame, Tmpl8::Sprite* sprite, int behavio
     this->beginY = posY;
 }
 
-void Tank::setPosition(float posX, float posY)
-{
-    this->posX = posX;
-    this->posY = posY;
-}
-
 void Tank::setFrame(int frame)
 {
     this->frame = frame;
@@ -95,7 +89,7 @@ void Tank::keyDown(int key)
 void Tank::move(float deltaTime, bool& resetTankPos)
 {
     deltaTime /= 1000.0f;
-    if (behaviour == 0)
+    if (behaviour == 0) //player
     {
         float moveSpeed = 200.0f;
         float nx = posX;
@@ -125,13 +119,13 @@ void Tank::move(float deltaTime, bool& resetTankPos)
             Game::CheckGun(nx, ny) &&
             Game::CheckGun(nx + 30.0f, ny + 30.0f) &&
             Game::CheckGun(nx + 30.0f, ny) &&
-            Game::CheckGun(nx, ny + 30.0f))
+            Game::CheckGun(nx, ny + 30.0f)) //check if the tank isn't colliding with a wall
         {
             posX = nx;
             posY = ny;
         }
 
-        if (resetTankPos)
+        if (resetTankPos) //reset the tank position if resetTankPos is called
         {
             posX = beginX;
             posY = beginY;
@@ -139,6 +133,7 @@ void Tank::move(float deltaTime, bool& resetTankPos)
         }
     }
 
+    //enemy tanks
     if (behaviour == 1)
     {
     	posY -= 100.0f * deltaTime;
@@ -166,7 +161,7 @@ void Tank::move(float deltaTime, bool& resetTankPos)
     if (!Game::CheckPos(posX, posY) ||
 		!Game::CheckPos(posX + 30.0f, posY + 30.0f) ||
 		!Game::CheckPos(posX + 30.0f, posY) ||
-		!Game::CheckPos(posX, posY + 30.0f) && behaviour > 1)
+		!Game::CheckPos(posX, posY + 30.0f) && behaviour > 1) //check if the tank isn't colliding with a wall
     {
     	posY = beginY;
     	posX = beginX;
@@ -178,7 +173,7 @@ void Tank::Box(const Tmpl8::Surface& surface, Tmpl8::Pixel color) const
     surface.Box(posX, posY, posX + 32, posY + 32, color);
 }
 
-
+//collisions
 bool Tank::collision(const Tank& other) const
 {
 	if (posX <= other.posX + 32 && posY <= other.posY + 32 && posX + 32 >= other.posX && posY + 32 >= other.posY)

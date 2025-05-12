@@ -1,5 +1,6 @@
 #include "Item.h"
 #include "game.h"
+#include "template.h"
 
 using namespace Tmpl8;
 
@@ -10,12 +11,6 @@ Item::Item(float const x, float const y, Tmpl8::Sprite* sprite)
     this->sprite = sprite;
 }
 
-void Item::setPosition(float x, float y)
-{
-	this->x = x;
-	this->y = y;
-}
-
 void Item::move()
 {
     float nx = x;
@@ -23,13 +18,13 @@ void Item::move()
 
     do
     {
-        nx = static_cast<float>(IRand(ScreenWidth));
-        ny = static_cast<float>(IRand(ScreenHeight));
+        nx = static_cast<float>(IRand(ScreenWidth)); 
+        ny = static_cast<float>(IRand(ScreenHeight)); //get random positions
 
     } while (!Game::CheckPos(nx, ny) ||
         !Game::CheckPos(nx + 25.0f, ny + 25.0f) ||
         !Game::CheckPos(nx + 25.0f, ny) ||
-        !Game::CheckPos(nx, ny + 25.0f));
+        !Game::CheckPos(nx, ny + 25.0f)); //check if item isn't colliding with a wall
 
     x = nx;
     y = ny;

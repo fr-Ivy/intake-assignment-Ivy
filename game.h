@@ -1,5 +1,4 @@
 #pragma once
-#include "template.h"
 #include "Tank.h"
 #include "Bullets.h"
 
@@ -38,7 +37,6 @@ public:
 	void KeyDown(int key) { tanks[0].keyDown(key); }
 	static bool CheckPos(float x, float y);
 	static bool CheckGun(float x, float y);
-	void drawGun();
 	Tank* getTanks() { return tanks; }
 	Bullets* getBullets() { return bullets; }
 

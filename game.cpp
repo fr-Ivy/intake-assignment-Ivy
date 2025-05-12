@@ -90,11 +90,6 @@ namespace Tmpl8
 
 		item[0] = Item(itemX, itemY, &coin);
 
-		for (Item& items : item)
-		{
-			items.setPosition(itemX, itemY);
-		}
-
 		//bullets directions:
 		//up = 1
 		//down = 2

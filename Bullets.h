@@ -22,11 +22,11 @@ public:
 
 
 private:
-	float x = 0;
-	float y = 0;
-	float r = 0;
-	float beginX = 0;
-	float beginY = 0;
+	float x = 0.0f;
+	float y = 0.0f;
+	float r = 0.0f;
+	float beginX = 0.0f;
+	float beginY = 0.0f;
 	float speed = 0.0f;
 	int direction = 1;
 	bool isActive = false;

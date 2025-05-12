@@ -1,8 +1,10 @@
 #include "Bullets.h"
 #include "game.h"
+#include "template.h"
+
 using namespace Tmpl8;
 
-Bullets::Bullets(float x, float y, float r, float speed, float beginX, float beginY, int direction)
+Bullets::Bullets(float x, float y, float r, float speed, float beginX, float beginY, int direction) //get properties
 {
 	this->x = x;
 	this->y = y;
@@ -65,7 +67,7 @@ void Bullets::move(float deltaTime)
     if (!Game::CheckPos(x - r, y - r) ||
         !Game::CheckPos(x + r, y + r) ||
         !Game::CheckPos(x - r, y + r) ||
-        !Game::CheckPos(x + r, y - r))
+        !Game::CheckPos(x + r, y - r)) //checks if the circle doesn't collide with the walls
     {
         x = beginX;
         y = beginY;
@@ -74,10 +76,10 @@ void Bullets::move(float deltaTime)
 
 void Bullets::draw(const Surface& surface) const
 {
-    for (int i = 0; i < 64; i++)
+    for (int i = 0; i < 64; i++) //draw a dot 64 times
     {
-        float r1 = static_cast<float>(i) * PI / 32, r2 = static_cast<float>(i + 1) * PI / 32;
-        surface.Line(x - r * sinf(r1), y - r * cosf(r1),
+        float r1 = static_cast<float>(i) * PI / 32, r2 = static_cast<float>(i + 1) * PI / 32; //gets the angle
+        surface.Line(x - r * sinf(r1), y - r * cosf(r1), //draw the circle at the right radius
             x - r * sinf(r2), y - r * cosf(r2), 0xff0000);
 
         surface.Line(x - (r + 1) * sinf(r1), y - (r + 1) * cosf(r1),

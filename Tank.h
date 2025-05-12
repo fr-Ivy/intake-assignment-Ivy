@@ -12,7 +12,6 @@ public:
 	Tank() = default;
 	Tank(float posX, float posY, int frame, Tmpl8::Sprite* sprite, int behaviour);
 	~Tank() = default;
-	void setPosition(float posX, float posY);
 	void setFrame(int frame);
 	void Draw(Tmpl8::Surface& surface) const;
 	void move(float deltaTime, bool& resetTankPos);
@@ -30,9 +29,9 @@ public:
 private:
 	float posX = 0.0f;
 	float posY = 0.0f;
-	int frame = 0.0f;
+	int frame = 0;
 	Tmpl8::Sprite* sprite = nullptr;
-	int behaviour = 0.0f;
+	int behaviour = 0;
 	float beginX = 0.0f;
 	float beginY = 0.0f;
 };

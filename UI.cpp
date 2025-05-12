@@ -1,11 +1,13 @@
 #include "UI.h"
 #include <iostream>
 
-UI::UI(Tmpl8::Surface* surface, std::vector<buttons> button) : surface(surface), button(button), case_number(-1), button_detected(-1)
+UI::UI(Tmpl8::Surface* surface, std::vector<buttons> button) : //get the buttons
+surface(surface), button(button), //call the correct screen or button
+case_number(-1), button_detected(-1) //change it so it isn't 0 at the start
 {
 }
 
-void UI::drawButton(int start, int end) const
+void UI::drawButton(int start, int end) const //draw the buttons that are called
 {
 	for (int i = start; i < end; i++)
 	{
@@ -13,7 +15,7 @@ void UI::drawButton(int start, int end) const
 	}
 }
 
-void UI::detectMouse(float mouse_x, float mouse_y)
+void UI::detectMouse(float mouse_x, float mouse_y) //get the position of the mouse
 {
 	this->mouse_x = mouse_x;
 	this->mouse_y = mouse_y;
@@ -27,10 +29,10 @@ void UI::detectButton(int start, int end) //which buttons should it detect
 		if (mouse_x <= button[i].x + button[i].x2 && 
 			mouse_x >= button[i].x &&
 			mouse_y <= button[i].y + button[i].y2 && 
-			mouse_y >= button[i].y)
+			mouse_y >= button[i].y) //if the mouse is over the button
 		{
 			//std::cout << "detected" << std::endl;
-			button_detected = i;
+			button_detected = i; //update the right button number
 			break;
 		}
 		else
@@ -45,9 +47,9 @@ void UI::mouseClick(bool clicked)
 {
 	if (clicked)
 	{
-		if (button_detected >= 0 && clicked && button_detected < button.size())
+		if (button_detected >= 0) //if clicked on a button
 		{
-			case_number = button_detected;
+			case_number = button_detected; //update another button number
 			//std::cout << case_number << std::endl;
 		}
 	}
@@ -61,7 +63,7 @@ void UI::buttonCase(bool& show_startscreen, bool& show_game, bool& show_controls
 	int& lives, int& collected, bool& resetTankPos, bool clicked, bool enabled) const
 {
 	//std::cout << "Case number: " << case_number << std::endl;
-	switch (case_number)
+	switch (case_number) //look which button is called
 	{
 	case 0: // controls
 		show_startscreen = false;

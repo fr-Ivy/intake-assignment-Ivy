@@ -1,7 +1,4 @@
 #include "spawn_objects.h"
-#include <iostream>
-
-//spawn_objects::spawn_objects() {}
 
 void spawn_objects::spawnObjects(Tmpl8::Game& objects, const int& collected, Tmpl8::Surface& surface)
 {
