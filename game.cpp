@@ -67,6 +67,7 @@ namespace Tmpl8
 
 	void Game::Init()
 	{
+		//buttons positions and length or height
 		std::vector<buttons> button
 			{
 				{50, 375, 200, 60},
@@ -81,6 +82,7 @@ namespace Tmpl8
 
 		ui = UI(screen, button);
 
+		//tanks
 		tanks[0] = Tank(tankX, tankY, 8, &tank, 0);
 		tanks[1] = Tank(enemy1X, enemy1Y, 8, &badTank1, 1);
 		tanks[2] = Tank(enemy2X, enemy2Y, 0, &badTank2, 3);
@@ -88,9 +90,10 @@ namespace Tmpl8
 		tanks[4] = Tank(enemy4X, enemy4Y, 12, &badTank3, 2);
 
 
-
+		//item
 		item[0] = Item(itemX, itemY, &coin);
 
+		//bullets
 		//bullets directions:
 		//up = 1
 		//down = 2
@@ -128,7 +131,8 @@ namespace Tmpl8
 			for (int j = 0; j < 32; j++) //loop through every pixel
 				dst[j] = src[j]; //prints the tile on the screen
 	}
-	
+
+	//check positions
 	bool Game::CheckPos(float x, float y)
 	{
 		float tx = x / 32.0f, ty = y / 32.0f; //gets the tile
@@ -150,6 +154,7 @@ namespace Tmpl8
 		ui.buttonCase(show_startscreen, show_game, show_controls, show_gameover, show_win, 
 			lives, collected, resetTankPos, clicked, enabled);
 
+		//stuff for start screen
 		if (show_startscreen)
 		{
 			screen->Clear(0);
@@ -160,12 +165,13 @@ namespace Tmpl8
 			enabled = true;
 
 			screen->PrintScaled("PLAY", 375, 400, 2, 2, 0XFFFFFF);
-			screen->PrintScaled("CONTROLS", 100, 400, 2, 2, 0xffffff);
+			screen->PrintScaled("INSTRUCTIONS", 100, 400, 2, 2, 0xffffff);
 			screen->PrintScaled("EXIT", 625, 400, 2, 2, 0xffffff);
 			screen->PrintScaled("welcome", 20, 20, 2, 2, 0xffffff);
 			mouse.Draw(screen, mouseX - 12, mouseY - 12);
 		}
 
+		//stuff for controls screen
 		if (show_controls)
 		{
 			instructions.CopyTo(screen, 0, 0);
@@ -178,15 +184,17 @@ namespace Tmpl8
 			mouse.Draw(screen, mouseX - 12, mouseY - 12);
 		} 
 
+		//stuff for the game
 		if (show_game)
 		{
-			enabled = false;
-			//other stuff
+			enabled = false; //clicked isn't triggered (see UI.cpp)
+			//countdowns
 			cooldown1 -= deltaTime;
 			cooldown2 -= deltaTime;
 			cooldown3 -= deltaTime;
 			cooldown4 -= deltaTime;
 
+			//move functions
 			for (Tank& tank : tanks)
 			{
 				tank.move(deltaTime, resetTankPos);
@@ -197,7 +205,6 @@ namespace Tmpl8
 				bullet.move(deltaTime);
 			}
 			
-
 			//collisions
 			for (int i = 1; i <= 5; i++)
 			{
@@ -206,22 +213,19 @@ namespace Tmpl8
 					if (cooldown1 <= 0.0f)
 					{
 						lives--;
-						cooldown1 = 1000.0f;
-						cooldown4 = 500.0f;
+						cooldown1 = 1000.0f; //for colliding
+						cooldown4 = 500.0f; //for the "OUCH!"
 					}
 				}
 			}
 
 			if (tanks[0].itemCollision(item[0]))
 			{
-				for (Item& items : item)
+				item[0].move();
+				if (cooldown2 <= 0.0f)
 				{
-					items.move();
-					if (cooldown2 <= 0.0f)
-					{
-						collected++;
-						cooldown2 = 1000.0f;
-					}
+					collected++;
+					cooldown2 = 1000.0f;
 				}
 			}
 
@@ -248,6 +252,7 @@ namespace Tmpl8
 					DrawTile(tx, ty, screen, x * 32, y * 32); //draws the tile on the screen
 				}
 
+			//draw guns
 			for (float y = 0; y < 16; y++)
 				for (float x = 0; x < 25; x++)
 				{
@@ -280,7 +285,6 @@ namespace Tmpl8
 			screen->PrintScaled(msg2, 525, 12, 2, 2, 0xffffff);
 
 			//draw stuff on screen
-
 			tanks[0].Draw(*screen);
 #ifdef _DEBUG
 			tanks[0].Box(*screen, 0xff00ff);
@@ -314,15 +318,16 @@ namespace Tmpl8
 				}
 			}
 
-			// Decrement cooldown4 every frame
+			//if the amount of lives decreases, it prints "OUCH!"
 			if (cooldown4 > 0.0f)
 			{
-				screen->PrintScaled("OUCH!", tanks[0].getX() + 25, tanks[0].getY(), 3, 3, 0xffffff);
+				screen->PrintScaled("OUCH!", static_cast<int>(tanks[0].getX()) + 25, static_cast<int>(tanks[0].getY()), 3, 3, 0xffffff);
 			}
 
-
+			//tells if the tanks or bullets are spawned
 			spawn.spawnObjects(*this, collected, *screen);
 
+			//show screens
 			if (lives <= 0 && !show_win && !show_startscreen && !show_controls)
 			{
 				show_gameover = true;
@@ -334,6 +339,7 @@ namespace Tmpl8
 			}
 		}
 
+		//stuff for the win screen
 		if (show_win)
 		{
 			screen->Clear(0);
@@ -349,6 +355,7 @@ namespace Tmpl8
 			screen->PrintScaled("YOU WON", 275, 200, 5, 5, 0XFFFFFF);
 		}
 
+		//stuff for the game over screen
 		if (show_gameover)
 		{
 			screen->Clear(0);
