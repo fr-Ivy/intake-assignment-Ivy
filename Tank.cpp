@@ -113,13 +113,13 @@ void Tank::move(float deltaTime, bool& resetTankPos)
         }
 
         if (Game::CheckPos(nx, ny) &&
-            Game::CheckPos(nx + 30.0f, ny + 30.0f) &&
-            Game::CheckPos(nx + 30.0f, ny) &&
-            Game::CheckPos(nx, ny + 30.0f) && 
+            Game::CheckPos(nx + size, ny + size) &&
+            Game::CheckPos(nx + size, ny) &&
+            Game::CheckPos(nx, ny + size) &&
             Game::CheckGun(nx, ny) &&
-            Game::CheckGun(nx + 30.0f, ny + 30.0f) &&
-            Game::CheckGun(nx + 30.0f, ny) &&
-            Game::CheckGun(nx, ny + 30.0f)) //check if the tank isn't colliding with a wall
+            Game::CheckGun(nx + size, ny + size) &&
+            Game::CheckGun(nx + size, ny) &&
+            Game::CheckGun(nx, ny + size)) //check if the tank isn't colliding with a wall
         {
             posX = nx;
             posY = ny;
@@ -159,9 +159,9 @@ void Tank::move(float deltaTime, bool& resetTankPos)
     }
 
     if (!Game::CheckPos(posX, posY) ||
-		!Game::CheckPos(posX + 30.0f, posY + 30.0f) ||
-		!Game::CheckPos(posX + 30.0f, posY) ||
-		!Game::CheckPos(posX, posY + 30.0f) && behaviour > 1) //check if the tank isn't colliding with a wall
+		!Game::CheckPos(posX + size, posY + size) ||
+		!Game::CheckPos(posX + size, posY) ||
+		!Game::CheckPos(posX, posY + size) && behaviour > 1) //check if the tank isn't colliding with a wall
     {
     	posY = beginY;
     	posX = beginX;
@@ -176,7 +176,7 @@ void Tank::Box(const Tmpl8::Surface& surface, Tmpl8::Pixel color) const
 //collisions
 bool Tank::collision(const Tank& other) const
 {
-	if (posX <= other.posX + 32 && posY <= other.posY + 32 && posX + 32 >= other.posX && posY + 32 >= other.posY)
+	if (posX <= other.posX + size && posY <= other.posY + size && posX + size >= other.posX && posY + size >= other.posY)
 	{
 		//std::cout << "Hit by a tank!" << std::endl;
 		return true;
@@ -187,7 +187,7 @@ bool Tank::collision(const Tank& other) const
 bool Tank::itemCollision(const Item& item) const
 {
 
-    if (posX <= item.getX() + 25 && posY <= item.getY() + 25 && posX + 32 >= item.getX() && posY + 32 >= item.getY())
+    if (posX <= item.getX() + item.getSize() && posY <= item.getY() + item.getSize() && posX + size >= item.getX() && posY + size >= item.getY())
     {
         //std::cout << "Item, YAYYYY!" << std::endl;
         return true;
@@ -200,8 +200,8 @@ bool Tank::bulletCollision(const Bullets& bullets) const
 
     if (posX - bullets.getR() <= bullets.getX() &&
         posY - bullets.getR() <= bullets.getY() &&
-        posX + 32 + bullets.getR() >= bullets.getX() &&
-        posY + 32 + bullets.getR() >= bullets.getY())
+        posX + size + bullets.getR() >= bullets.getX() &&
+        posY + size + bullets.getR() >= bullets.getY())
     {
         //std::cout << "a Bullet! ouch!" << std::endl;
         return true;

@@ -12,8 +12,10 @@ public:
 	void draw(Tmpl8::Surface& surface) const;
 	float getX() const {return x;}
 	float getY() const {return y;}
+	float getSize() const { return size; }
 private:
 	float x = 0.0f;
 	float y = 0.0f;
+	float size = 25.0f;
 	Tmpl8::Sprite* sprite = nullptr;
 };
