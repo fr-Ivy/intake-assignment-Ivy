@@ -18,18 +18,29 @@ void Item::move()
 
     do
     {
+        //chose random position
         nx = static_cast<float>(IRand(ScreenWidth)); 
         ny = static_cast<float>(IRand(ScreenHeight)); //get random positions
 
     } while (!Game::CheckPos(nx, ny) ||
-        !Game::CheckPos(nx + 25.0f, ny + 25.0f) ||
-        !Game::CheckPos(nx + 25.0f, ny) ||
-        !Game::CheckPos(nx, ny + 25.0f)); //check if item isn't colliding with a wall
+        !Game::CheckPos(nx + size, ny + size) ||
+        !Game::CheckPos(nx + size, ny) ||
+        !Game::CheckPos(nx, ny + size)); //check if item isn't colliding with a wall
 
     x = nx;
     y = ny;
 }
 
+void Item::rotate(Tmpl8::Surface& surface, float deltaTime)
+{
+    frameSeconds -= deltaTime;
+    if (frameSeconds <= 0.0f)
+    {
+        frame = (frame + 1) % sprite->Frames();
+        sprite->SetFrame(frame);
+        frameSeconds = 100.0f;
+    }
+}
 
 void Item::draw(Tmpl8::Surface& surface) const
 {
@@ -41,5 +52,5 @@ void Item::draw(Tmpl8::Surface& surface) const
 
 void Item::Box(const Tmpl8::Surface& surface, Tmpl8::Pixel color) const
 {
-    surface.Box(x, y, x + 25, y + 25, color);
+    surface.Box(x, y, x + size, y + size, color);
 }

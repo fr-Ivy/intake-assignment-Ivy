@@ -4,6 +4,7 @@
 
 using namespace Tmpl8;
 
+//save stuff
 Bullets::Bullets(float x, float y, float r, float speed, float beginX, float beginY, int direction) //get properties
 {
 	this->x = x;
@@ -14,7 +15,6 @@ Bullets::Bullets(float x, float y, float r, float speed, float beginX, float beg
     this->speed = speed;
     this->direction = direction;
 }
-
 
 void Bullets::move(float deltaTime)
 {
@@ -74,6 +74,7 @@ void Bullets::move(float deltaTime)
     }
 }
 
+//draw bullets
 void Bullets::draw(const Surface& surface) const
 {
     for (int i = 0; i < 64; i++) //draw a dot 64 times

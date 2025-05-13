@@ -61,16 +61,9 @@ private:
 	Bullets bullets[6];
 
 
-	bool tank1 = false;
-	bool tank2 = false;
-	bool tank3 = false;
-	bool tank4 = false;
+	bool tank1 = false, tank2 = false, tank3 = false, tank4 = false;
 
-	bool bullet0 = false;
-	bool bullet1 = false;
-	bool bullet2 = false;
-	bool bullet3 = false;
-	bool bullet4 = false;
-	bool bullet5 = false;
+	bool bullet0 = false, bullet1 = false, bullet2 = false,
+	bullet3 = false, bullet4 = false, bullet5 = false;
 };
 }; // namespace Tmpl8

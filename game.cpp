@@ -45,7 +45,7 @@ namespace Tmpl8
 	Sprite gun3(new Surface("assets/minigun.tga"), 32);
 	Sprite bullet(new Surface("assets/phaser.tga"), 16);
 	Sprite mouse(new Surface("assets/target.tga"), 1);
-	Sprite coin(new Surface("assets/coin.png"), 1);
+	Sprite coin(new Surface("assets/REAL COINS.png"), 8);
 
 	//positions
 	float tankX = 23.0f * 32.0f, tankY = 14.0f * 32.0f;
@@ -55,10 +55,12 @@ namespace Tmpl8
 	float enemy4X = 1.0f * 32.0f, enemy4Y = 4.0f * 32.0f;
 	float itemX = 45.0f;
 	float itemY = 45.0f;
-	float cooldown1 = 1000.0f;
-	float cooldown2 = 1000.0f;
-	float cooldown3 = 500.0f;
-	float cooldown4 = 0.0f;
+
+	//cooldowns
+	float tankCollisionCD = 0.0f;
+	float itemCollisionCD = 0.0f;
+	float bulletCollisionCD = 0.0f;
+	float hitCD = 0.0f;
 	float Seconds = 0.0f;
 
 	Item item[1];
@@ -165,7 +167,7 @@ namespace Tmpl8
 			enabled = true;
 
 			screen->PrintScaled("PLAY", 375, 400, 2, 2, 0XFFFFFF);
-			screen->PrintScaled("INSTRUCTIONS", 100, 400, 2, 2, 0xffffff);
+			screen->PrintScaled("INSTRUCTIONS", 80, 400, 2, 2, 0xffffff);
 			screen->PrintScaled("EXIT", 625, 400, 2, 2, 0xffffff);
 			screen->PrintScaled("welcome", 20, 20, 2, 2, 0xffffff);
 			mouse.Draw(screen, mouseX - 12, mouseY - 12);
@@ -189,10 +191,10 @@ namespace Tmpl8
 		{
 			enabled = false; //clicked isn't triggered (see UI.cpp)
 			//countdowns
-			cooldown1 -= deltaTime;
-			cooldown2 -= deltaTime;
-			cooldown3 -= deltaTime;
-			cooldown4 -= deltaTime;
+			tankCollisionCD -= deltaTime;
+			itemCollisionCD -= deltaTime;
+			bulletCollisionCD -= deltaTime;
+			hitCD -= deltaTime;
 
 			//move functions
 			for (Tank& tank : tanks)
@@ -210,11 +212,11 @@ namespace Tmpl8
 			{
 				if (tanks[0].collision(tanks[i]) && tanks[i].getActive())
 				{
-					if (cooldown1 <= 0.0f)
+					if (tankCollisionCD <= 0.0f)
 					{
 						lives--;
-						cooldown1 = 1000.0f; //for colliding
-						cooldown4 = 500.0f; //for the "OUCH!"
+						tankCollisionCD = 1000.0f; //for colliding
+						hitCD = 500.0f; //for the "OUCH!"
 					}
 				}
 			}
@@ -222,22 +224,26 @@ namespace Tmpl8
 			if (tanks[0].itemCollision(item[0]))
 			{
 				item[0].move();
-				if (cooldown2 <= 0.0f)
+				if (itemCollisionCD <= 0.0f)
 				{
 					collected++;
-					cooldown2 = 1000.0f;
+					itemCollisionCD = 1000.0f; //for collision
 				}
 			}
 
+			//rotating coin
+			item[0].rotate(*screen, deltaTime);
+
+			//another collision
 			for (int i = 0; i < 6; i++)
 			{
 				if (tanks[0].bulletCollision(bullets[i]) && bullets[i].getActive())
 				{
-					if (cooldown3 <= 0.0f)
+					if (bulletCollisionCD <= 0.0f)
 					{
 						lives--;
-						cooldown3 = 500.0f;
-						cooldown4 = 500.0f;
+						bulletCollisionCD = 500.0f; //for collision
+						hitCD = 500.0f; //to print "OUCH!"
 					}
 				}
 			}
@@ -301,13 +307,12 @@ namespace Tmpl8
 				}
 			}
 
-			for (Item& items : item)
-			{
-				items.draw(*screen);
+
+			item[0].draw(*screen);
 #ifdef _DEBUG
-				items.Box(*screen, 0xffffff);
+			item[0].Box(*screen, 0xffffff);
 #endif
-			}
+
 
 			Seconds += deltaTime;
 			for (int i = 0; i < 6; i++)
@@ -319,7 +324,7 @@ namespace Tmpl8
 			}
 
 			//if the amount of lives decreases, it prints "OUCH!"
-			if (cooldown4 > 0.0f)
+			if (hitCD > 0.0f)
 			{
 				screen->PrintScaled("OUCH!", static_cast<int>(tanks[0].getX()) + 25, static_cast<int>(tanks[0].getY()), 3, 3, 0xffffff);
 			}
