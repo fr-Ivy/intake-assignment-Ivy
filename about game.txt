@@ -1,17 +1,12 @@
-important!!!!:
+what would I have done differently, if I had more time?
+- set the map in another file (so not in game.cpp)
+- maybe use functions instead of working with cases
+- reset the positions of bullets and enemy tanks once they get drawn to the screen.
+- make the bullets disappear once they hit the player
 
 
-fix:
 
-
-add:
-- add readme.txt
-- explain the code
-
-
-if there is time left (probably not (stupid exams)) add:
+(if there is time left (probably not (stupid exams)) add:
 - hearts in the game that the tank can collect to increase its amount of lives
 - option to keep playing after player collected 8 items
-- add sound effects
-
-
+- add sound effects)

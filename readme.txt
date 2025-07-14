@@ -11,5 +11,6 @@ Your goal is to collect coins with your tank.
 You can move your tank with the arrow keys or WASD.
 On the way to the coins, you'll see a red tank or a bullet, avoid them. You only have 3 lives!
 If you collect a total of 9 coins, you win!
+But everytime you collect a coin it gets more difficult....... :)
 But if you're out of lives, you lose...
 Good luck!

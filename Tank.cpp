@@ -159,7 +159,7 @@ void Tank::move(float deltaTime, bool& resetTankPos)
         frame = 4;
     }
 
-    //check if the tank isn't colliding with a wall or gun
+    //check if the tank isn't colliding with a wall
     if (!Game::CheckPos(posX, posY) ||
 		!Game::CheckPos(posX + size, posY + size) ||
 		!Game::CheckPos(posX + size, posY) ||

@@ -61,7 +61,7 @@ namespace Tmpl8
 	float itemCollisionCD = 0.0f;
 	float bulletCollisionCD = 0.0f;
 	float hitCD = 0.0f;
-	float Seconds = 0.0f;
+	//float Seconds = 0.0f;
 
 	Item item[1];
 	UI ui;
@@ -314,7 +314,7 @@ namespace Tmpl8
 #endif
 
 
-			Seconds += deltaTime;
+			//Seconds += deltaTime;
 			for (int i = 0; i < 6; i++)
 			{
 				if (bullets[i].getActive())
